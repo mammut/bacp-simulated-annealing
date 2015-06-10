@@ -1,0 +1,174 @@
+%% LyX 2.1.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[10pt,spanish,letter]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,headheight=1.5cm,headsep=0.5cm,footskip=1.5cm}
+\usepackage{amsmath}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage[dvips]{graphicx}
+\usepackage{url}
+
+\makeatother
+
+\usepackage{babel}
+\addto\shorthandsspanish{\spanishdeactivate{~<>}}
+
+\begin{document}
+
+\title{Inteligencia Artificial \\
+ \begin{Large}Informe Final: Problema {[}Nombre Problema{]}\end{Large}}
+
+
+\author{{[}Nombre autor{]}}
+
+
+\date{\today}
+
+\maketitle
+ 
+
+%--------------------No borrar esta secci\'on--------------------------------%
+
+
+\section*{Evaluación}
+
+\begin{tabular}{ll}
+Mejoras 1ra Entrega (10 \%):  & \underline{\hspace{2cm}}\tabularnewline
+Código Fuente (10 \%):  & \underline{\hspace{2cm}}\tabularnewline
+Representación (15 \%):  & \underline{\hspace{2cm}} \tabularnewline
+Descripción del algoritmo (20 \%):  & \underline{\hspace{2cm}} \tabularnewline
+Experimentos (10 \%):  & \underline{\hspace{2cm}} \tabularnewline
+Resultados (10 \%):  & \underline{\hspace{2cm}} \tabularnewline
+Conclusiones (20 \%):  & \underline{\hspace{2cm}}\tabularnewline
+Bibliograf\'{i}a (5 \%):  & \underline{\hspace{2cm}}\tabularnewline
+ & \tabularnewline
+\textbf{Nota Final (100)}:  & \underline{\hspace{2cm}} \tabularnewline
+\end{tabular}%---------------------------------------------------------------------------%
+\begin{abstract}
+Resumen del informe en no más de 10 líneas, donde se sintetice el
+problema que se trata y sirva para que un lector no involucrado comprenda
+el objetivo del documento. \textbf{Además, debería tener una pequeña
+síntesis del acercamiento que se utiliza en cada trabajo, con los
+resultados más destacables o logros en los experimentos realizados.}
+\end{abstract}
+
+\section{Introducción}
+
+Una explicación breve del contenido del informe. Es decir, detalla:
+Propósito, \textbf{Estructura del Documento actualizada con los contenidos
+del entregable 2}, Descripción (muy breve) del Problema y Motivación.
+\textbf{Debería contener además las correcciones solicitadas por el
+ayudante, además de hablar del acercamiento que se utiliza en cada
+trabajo, así como indicar información de los experimentos realizados.}
+
+
+\section{Definición del Problema}
+
+Explicación del problema que se va a estudiar, en qué consiste, cuáles
+son sus variables, restricciones y objetivo(s) de manera general (en
+palabras, no una formulación matemática). Debe entenderse claramente
+el problema y qué busca resolver. Explicar si existen problemas relacionados.
+Destacar, si existen, las variantes más conocidas.\\
+ Redactar en tercera persona, sin faltas de ortografía y referenciar
+correctamente sus fuentes mediante el comando \verb+\cite{ }+. Por
+ejemplo, para hacer referencia al artículo de algoritmos híbridos
+para problemas de satisfacción de restricciones~\cite{Prosser93Hybrid}.\textbf{
+Debería contener además las correcciones solicitadas por el ayudante.}
+
+
+\section{Estado del Arte}
+
+La información que describen en este punto se basa en los estudios
+realizados con antelación respecto al tema. Lo más importante que
+se ha hecho hasta ahora con relación al problema. Debería responder
+preguntas como las siguientes: ?`cuándo surge?, ?`qué métodos se han
+usado para resolverlo?, ?`cuáles son los mejores algoritmos que se
+han creado hasta la fecha?, ?`qué representaciones han tenido los
+mejores resultados?, ?`cuál es la tendencia actual para resolver el
+problema?, tipos de movimientos, heurísticas, métodos completos, tendencias,
+etc... Puede incluir gráficos comparativos o explicativos. \textbf{Debería
+contener además las correcciones solicitadas por el ayudante.}
+
+
+\section{Modelo Matemático}
+
+Uno o más modelos matemáticos para el problema, idealmente indicando
+el espacio de búsqueda para cada uno. Cada modelo debe estar correctamente
+referenciado, además no debe ser una imagen extraída. También deben
+explicarse en detalle cada una de las partes, mostrando claramente
+la función a maximizar/minimizar, variables y restricciones. Tanto
+las fórmulas como las explicaciones deben ser consistentes.\textbf{
+Debería contener además las correcciones solicitadas por el ayudante.}
+
+
+\section{Representación}
+
+Representación matemática y estructura de datos que se usa (arreglos,
+matrices, etc.), por qué se usa, la relación entre la representación
+matemática y la estructura. \textbf{Utilizar figuras, tablas, etc.
+en lo posible, de modo que sea fácil entender las estructuras utilizadas,
+además describa lo más sencillo y claro que pueda.}
+
+
+\section{Descripción del algoritmo}
+
+Cómo fue implementando, interesa la implementación más que el algoritmo
+genérico, es decir, si se tiene que implementar SA, lo que se espera
+es que se explique en pseudo código la estructura general y en párrafo
+explicativo cada parte cómo fue implementada para su caso particular,
+si se utilizan operadores se debe explicar por qué se utilizó ese
+operador, si fuera el caso de una técnica completa, si se utiliza
+recursión o no, etc. \textbf{Recuerde utilizar pseudocódigo para mostrar
+cada algoritmo y separar la explicación de su algoritmo en secciones
+para que se logre un mejor entendimiento. Además, en este punto no
+se espera que se incluya código, eso va aparte.}
+
+
+\section{Experimentos}
+
+Se necesita saber cómo experimentaron, cómo definieron parámetros,
+cómo se fueron modificando, cuáles problemas se trataron, cuáles fueron
+las instancias utilizadas, cuáles fueron las características de las
+instancias, cuáles fueron los criterios de término del algoritmo.
+\textbf{En el caso de las técnicas incompletas, es importante que
+ejecute su programa varias veces con distintas semillas aleatorias,
+para obtener valores estadísticos de los resultados}.
+
+
+\section{Resultados}
+
+Que fue lo que se logró con la experimentación, incluir tablas y parámetros,
+gráficos, etc. lo más explicativo posible. Además destacar puntos
+importantes del problema, características de las instancias que influyeron
+en los resultados, valores de parámetros que influyeron en los resultados,
+análisis de calidad de las soluciones encontradas a través del tiempo,
+análisis en profundidad de la técnica vs los resultados obtenidos,
+valores promedio, desviaciones, \textbf{comparaciones con resultados
+de la literatura}, etc. También debería discutir qué cosas podría
+haber agregado o quedan como desafíos para trabajo futuro en su algoritmo.
+
+
+\section{Conclusiones}
+
+Conclusiones RELEVANTES del estudio realizado. Debería contener conclusiones
+del informe 1 junto con conclusiones obtenidas del desarrollo del
+software, análisis de resultados de experimentos y trabajo futuro.
+
+
+\section{Bibliografía}
+
+Indicando toda la información necesaria de acuerdo al tipo de documento
+revisado. Las referencias deben ser citadas en el documento.  \bibliographystyle{plain}
+\bibliography{Referencias}
+ 
+\end{document}
