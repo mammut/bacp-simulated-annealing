@@ -10,33 +10,87 @@ int main(int argc, char *argv[])
 {
   char ch;
   char input[MAX_INPUT_BUFFER];
-  int row;
-  
-  srand(time(NULL));
-  sprintf(input, "%s", "None");
+  int i, j;
+  int found; /* Flag para imprimir 1 - 2 - 3 - 4 saltandose el primer `-` */
+  int min_output = 0;
+  clock_t begin, end;
 
-  while ((ch = getopt(argc, argv, "f:")) != EOF) {
+  struct bacp_instance *instance;
+  int iter        = 400;
+  float t_min     = 0.00001;
+  float t_current = 1.0;
+  float alpha     = 0.9;
+
+  srand((unsigned)time(NULL));
+
+  sprintf(input, "%s", "No Input file specified");
+
+  /* Parsear entrada usando libreria unistd */
+  while ((ch = getopt(argc, argv, "da:T:t:i:f:")) != EOF) {
     switch (ch) {
       case 'f':
         sprintf(input, "%s", optarg);
         break;
+      case 'i':
+        sscanf(optarg, "%d", &iter);
+        break;
+      case 'T':
+        sscanf(optarg, "%f", &t_current);
+        break;
+      case 't':
+        sscanf(optarg, "%f", &t_min);
+        break;
+      case 'a':
+        sscanf(optarg, "%f", &alpha);
+        break;
+       case 'd':
+        min_output = 1;
+        break;
     }
   }
+  //printf("Iter: %d\nT: %f\nt_min: %f\nalpha: %f\n\n", iter, t_current, t_min, alpha);
 
-  struct bacp_instance *i = load_instance(input);
-  struct prereq_list *prereqs = prereqs_of(i, 7);
-  initial_solution(i);
-  for(row = 0; row < i->n_periods; row++) {
-    printf("%d: %d\n", row, credits(i, row));
+  instance = load_instance(input);
+  initial_solution(instance);
+  for (i = 0; i < instance->n_periods; ++i) {
+    printf("%d: %d %d\n", i, credits(instance, i), courses_per_period(instance, i));
   }
-  printf("Max: %d\n", max_credits(i));
-  printf("Cost: %d\n", cost(i));
-  free(prereqs->items);
-  free(prereqs);
-  free(i->period);
-  free(i->credits);
-  free(i->prereq);
-  free(i);
+  printf("%d\n", cost(instance));
+  return 0;
+
+  begin = clock();
+  run(instance, iter, t_current, t_min, alpha);
+  end = clock();
+
+  if (min_output) {
+    /* Minimum output, usado por evaluate.py */
+    printf("%d %d %f", max_credits(instance), cost(instance), (double)(end - begin) / CLOCKS_PER_SEC);
+  } else {
+    for (i = 0; i < instance->n_periods; i++) {
+      printf("Periodo %d\n", i + 1);
+      found = 0;
+      for (j = 0; j < instance->n_courses; j++) {
+        if (instance->period[j] == i) {
+          if ( ! found) {
+            printf("%2d", j);
+            found = 1;
+          } else {
+            printf(" - %2d", j);
+          }
+        }
+      }
+      printf(" : %d\n", credits(instance, i));
+    }
+    printf("\nMaxima carga academica: %d\n", max_credits(instance));
+    printf("Costo final: %d\n", cost(instance));
+    printf("Tiempo de ejecucion %f s\n", (double)(end - begin) / CLOCKS_PER_SEC);
+  }
+
+  free(instance->period);
+  free(instance->credits);
+  free(instance->prereq);
+  free(instance);
+
   return 0;
 }
 

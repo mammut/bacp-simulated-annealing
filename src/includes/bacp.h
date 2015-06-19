@@ -31,5 +31,6 @@ int is_prereq_of(struct bacp_instance *, unsigned short int, unsigned short int)
 int credits(struct bacp_instance *, unsigned short int);
 int max_credits(struct bacp_instance *);
 int cost(struct bacp_instance *);
+int courses_per_period(struct bacp_instance *, unsigned short int);
 
 #endif
