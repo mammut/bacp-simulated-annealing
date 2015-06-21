@@ -15,13 +15,23 @@ void initial_solution(struct bacp_instance *instance)
 {
   int n = ceil(1.0 * instance->n_courses / instance->n_periods );
   int i, j;
+  int k, l;
+  int top, bottom;
 
+  top = 0;
+  bottom = 0;
   for (i = 0, j = 0; j < instance->n_courses; j++) {
     instance->period[j] = i; /* Heuristica para Greedy */
+    top = j;
+
     // instance->period[j] = rand() % instance->n_periods;  /* Iniciacio random del problema, para SA original */
     if ( (j + 1)%n == 0) {
+      for (k = bottom; k < top; k++) {
+        for (l = k+1; l < top; l++)
+          printf("%d, %d\n", k,l);
+      }
       i++;
-
+      bottom = j;
     }
   }
 }

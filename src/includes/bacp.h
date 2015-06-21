@@ -32,5 +32,6 @@ int credits(struct bacp_instance *, unsigned short int);
 int max_credits(struct bacp_instance *);
 int cost(struct bacp_instance *);
 int courses_per_period(struct bacp_instance *, unsigned short int);
+int has_collitions(struct bacp_instance *instance, unsigned short int);
 
 #endif

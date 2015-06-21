@@ -106,4 +106,13 @@ int courses_per_period(struct bacp_instance *instance, unsigned short int j)
   return total;
 }
 
+int has_collitions(struct bacp_instance *instance, unsigned short int i)
+{
+  int j;
+  int k;
 
+  j = 1;
+  k = 0;
+
+  return 0;
+}
