@@ -6,8 +6,10 @@
 #define PENALTY_COURSES 20
 
 void initial_solution(struct bacp_instance *);
+void fix_collitions(struct bacp_instance *, unsigned short int);
+unsigned int cost(struct bacp_instance *);
 unsigned short int *neighbour(struct bacp_instance *);
-void run(struct bacp_instance *, int iter, float, float, float);
+void run(struct bacp_instance *, int, float, float, float);
 float aceptar();
 unsigned short int *copy_solution(unsigned short int *, unsigned short int);
 

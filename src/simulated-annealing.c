@@ -2,40 +2,69 @@
 #include "includes/simulated-annealing.h"
 #include <stdlib.h>
 #include <math.h>
-#include <stdio.h>
 
 /**
- * Genera una solucion inicial, asignando parejamente los cursos
- * a periodos. Todos mus cercanos a num_cursos / num_periodos excepto
- * el ultimo al que se le asigna lo que sobre
+ * Genera una solucion inicial, asignando uniformemente los cursos
+ * a periodos. Todos mus cercanos a num_cursos / num_periodos excepto los
+ * primeros que estan definidos por el offset. El offset es la cantidad
+ * de cursos que tendran mas de n ramos, pues num_cursos/num_periodos es una
+ * division entera, el resto de los cursos por asignar se asignan a los
+ * primeros offset cursos
  *
  * @bacp_instance :: instancia del problema bacp
  */
 void initial_solution(struct bacp_instance *instance)
 {
-  int n = ceil(1.0 * instance->n_courses / instance->n_periods );
-  int i, j;
-  int k, l;
-  int top, bottom;
+  unsigned short int k; /* para iterar */
+  unsigned short int i, j, m; /* avances en periodos, cursos y reseteo de offset */
+  int n      = instance->n_courses / instance->n_periods;
+  int offset = instance->n_courses - n*instance->n_periods;
 
-  top = 0;
-  bottom = 0;
-  for (i = 0, j = 0; j < instance->n_courses; j++) {
-    instance->period[j] = i; /* Heuristica para Greedy */
-    top = j;
+  i = 0;
+  j = 0;
 
-    // instance->period[j] = rand() % instance->n_periods;  /* Iniciacio random del problema, para SA original */
-    if ( (j + 1)%n == 0) {
-      for (k = bottom; k < top; k++) {
-        for (l = k+1; l < top; l++)
-          printf("%d, %d\n", k,l);
-      }
+  for (m = 0, k = 0; k < offset*(n+1); k++) {
+    instance->period[j] = i;
+    if (++m % (n+1) == 0){
+      fix_collitions(instance, i);
       i++;
-      bottom = j;
     }
+    j++;
+  }
+  for (m = 0, k = 0; k < (instance->n_periods - offset) * n; k++) {
+    instance->period[j] = i;
+
+    if (++m % n == 0) {
+      fix_collitions(instance, i);
+      i++;
+    }
+    j++;
   }
 }
 
+/**
+ * Revisa el i-esimo periodo buscando posibles colisiones de prerequisitos
+ * si encuentra alguna, asigna al ramo que provoca la colision, al
+ * periodo siguiente
+ *
+ * @instance :: Instancia del BACP
+ * @i        :: Periodo i-esimo a analizar
+ */
+void fix_collitions(struct bacp_instance *instance, unsigned short int i)
+{
+  unsigned short int j, k;
+
+  for (j = 0; j < instance->n_courses; j++) {
+    if (instance->period[j] != i) continue;
+
+    /* Fix prerequs */
+    for (k = j+1; k < instance->n_courses; k++) {
+      if (j == k || instance->period[k] != i) continue;
+      if (is_prereq_of(instance, k, j))
+        instance->period[k] = (instance->period[k] + 1)%instance->n_periods;
+    }
+  }
+}
 
 
 /**
@@ -44,19 +73,17 @@ void initial_solution(struct bacp_instance *instance)
  *
  * @instance :: instancia del BACP
  */
-int cost(struct bacp_instance *instance)
+unsigned int cost(struct bacp_instance *instance)
 {
-  unsigned int i;
-  unsigned int total_penalty = 0;
+  unsigned short int i;
   unsigned int cpp;
+  unsigned int total_penalty = 0;
 
   /* Penalizacion por incumplimiento de prerequisito */
-  for (i = 0; i < instance->n_prereq; i++) {
-    /* periodo de a <= periodo de b */
-    if (instance->period[instance->prereq[i].a] <= instance->period[instance->prereq[i].b]) {
+  /* periodo de a <= periodo de b */
+  for (i = 0; i < instance->n_prereq; i++)
+    if (instance->period[instance->prereq[i].a] <= instance->period[instance->prereq[i].b])
       total_penalty += PENALTY_PREREQ;
-    }
-  }
 
   for (i = 0; i < instance->n_periods; i++) {
 
@@ -76,8 +103,8 @@ int cost(struct bacp_instance *instance)
 }
 
 /**
- * Genera una nueva solucion vecina, cambiando el periodo de un curso
- * al azar, a un periodo al azar
+ * Genera una nueva solucion vecina, cambiando un curso al azar a
+ * un periodo al azar
  *
  * @instance :: Instancia del BACP
  *
@@ -85,9 +112,9 @@ int cost(struct bacp_instance *instance)
  */
 unsigned short int *neighbour(struct bacp_instance *instance)
 {
-  unsigned short int *new_solution;
-  unsigned short int new_period;
   unsigned short int course;
+  unsigned short int new_period;
+  unsigned short int *new_solution;
 
   /* 0. Duplicar solucion actual */
   new_solution = copy_solution(instance->period, instance->n_courses);
@@ -140,7 +167,7 @@ void run(struct bacp_instance *instance, int iter, float t_current, float t_min,
         s_c              = instance->period;
         old_cost         = new_cost;
         instance->period = NULL;
-      }else if (exp(-abs(new_cost - old_cost)/t_current) > aceptar()) {
+      } else if (exp(-abs(new_cost - old_cost)/t_current) > aceptar()) {
         free(s_c);
         s_c              = instance->period;
         old_cost         = new_cost;
@@ -182,7 +209,7 @@ float aceptar()
  */
 unsigned short int *copy_solution(unsigned short int *old, unsigned short int size)
 {
-  int i;
+  unsigned short int i;
   unsigned short int *copy = (unsigned short int *)malloc(sizeof(unsigned short int) * size);
 
   for (i = 0; i < size; i++)

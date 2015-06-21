@@ -15,9 +15,9 @@
  */
 struct bacp_instance *load_instance(char file_path[])
 {
+  unsigned short int i;
   FILE *file;
   struct bacp_instance *instance = (struct bacp_instance *)malloc(sizeof(struct bacp_instance));
-  unsigned short int i;
 
   if ((file = fopen(file_path, "r")) == 0) {
     fprintf(stderr, "No se pudo abrir el archivo %s. Por favor revise su existencia y permisos.", file_path);
@@ -36,8 +36,10 @@ struct bacp_instance *load_instance(char file_path[])
 
   instance->period  = (unsigned short int *)malloc(sizeof(unsigned short int) * instance->n_courses);
   instance->credits = (unsigned short int *)malloc(sizeof(unsigned short int) * instance->n_courses);
-  for (i = 0; i < instance->n_courses; i++)
+  for (i = 0; i < instance->n_courses; i++){
+    instance->period[i] = -1;
     fscanf(file, "%hu ", &instance->credits[i]);
+  }
 
   instance->prereq = (struct prereq *)malloc(sizeof(struct prereq) * instance->n_prereq);
   for (i = 0; i < instance->n_prereq; i++)
@@ -53,11 +55,13 @@ struct bacp_instance *load_instance(char file_path[])
  *
  * @instance :: instancia del BACP
  * @j        :: periodo j sobre el que se calcula la carga academica
+ *
+ * @return   :: numero total de creditos
  */
-int credits(struct bacp_instance *instance, unsigned short int j)
+unsigned int credits(struct bacp_instance *instance, unsigned short int j)
 {
-  int total_credits = 0;
-  int i;
+  unsigned short int i;
+  unsigned int total_credits = 0;
 
   for (i = 0; i < instance->n_courses; i++)
     if (instance->period[i] == j)
@@ -73,11 +77,11 @@ int credits(struct bacp_instance *instance, unsigned short int j)
  *
  * @return   :: carga maxima de creditos
  */
-int max_credits(struct bacp_instance *instance)
+unsigned int max_credits(struct bacp_instance *instance)
 {
-  int max = credits(instance, 0);
-  int is_bigger;
-  int j;
+  unsigned short int j;
+  unsigned int is_bigger;
+  unsigned int max = credits(instance, 0);
 
   for (j = 1; j < instance->n_courses; j++) {
     is_bigger = credits(instance, j);
@@ -91,28 +95,38 @@ int max_credits(struct bacp_instance *instance)
  * Total de cursos en el periodo j
  *
  * @instance :: instancia del BACP
- * @j        :: periodo j
+ * @i        :: periodo i
  *
  * @return   :: total de cursos
  */
-int courses_per_period(struct bacp_instance *instance, unsigned short int j)
+unsigned int courses_per_period(struct bacp_instance *instance, unsigned short int i)
 {
-  int total = 0;
-  int i;
+  unsigned short int j;
+  unsigned int total = 0;
 
-  for (i = 0; i < instance->n_courses; i++)
-    if (instance->period[i] == j) total++;
+  for (j = 0; j < instance->n_courses; j++)
+    if (instance->period[j] == i) total++;
 
   return total;
 }
 
-int has_collitions(struct bacp_instance *instance, unsigned short int i)
+/**
+ * Retorna si a es prerequisito de b o vicecersa
+ *
+ * instance :: Instancia del problema BACP
+ * a        :: Primer curso
+ * b        :: Segundo curso
+ */
+int is_prereq_of(struct bacp_instance *instance, unsigned short int a, unsigned short int b)
 {
-  int j;
-  int k;
+  unsigned short int i;
 
-  j = 1;
-  k = 0;
-
+  for (i = 0; i < instance->n_prereq; i++) {
+    if ((instance->prereq[i].a == b && instance->prereq[i].b == a) ||
+        (instance->prereq[i].a == a && instance->prereq[i].b == b)) {
+      return 1;
+    }
+  }
   return 0;
 }
+
