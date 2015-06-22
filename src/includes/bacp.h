@@ -24,5 +24,6 @@ unsigned int credits(struct bacp_instance *, unsigned short int);
 unsigned int max_credits(struct bacp_instance *);
 unsigned int courses_per_period(struct bacp_instance *, unsigned short int);
 int is_prereq_of(struct bacp_instance *, unsigned short int, unsigned short int);
+unsigned short int optimum(struct bacp_instance *);
 
 #endif

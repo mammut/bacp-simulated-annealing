@@ -4,41 +4,37 @@
 #include <math.h>
 
 /**
- * Genera una solucion inicial, asignando uniformemente los cursos
- * a periodos. Todos mus cercanos a num_cursos / num_periodos excepto los
- * primeros que estan definidos por el offset. El offset es la cantidad
- * de cursos que tendran mas de n ramos, pues num_cursos/num_periodos es una
- * division entera, el resto de los cursos por asignar se asignan a los
- * primeros offset cursos
+ * Genera una solucion inicial, utilizando una heuristica greedy:
+ * si no se viola la condicion de maximo de creditos y cursos:
+ *   - asignar el curso j al periodo i.
+ *   - arreglar colisiones de prerequisitos moviendo al siguiente periodo
+ *     el curso que no cumple.
+ * si no
+ *   - avanzar el periodo i al i + 1
+ *
+ * repetir hasta haber asignado todos los prerequisitosk
  *
  * @bacp_instance :: instancia del problema bacp
  */
 void initial_solution(struct bacp_instance *instance)
 {
-  unsigned short int k; /* para iterar */
-  unsigned short int i, j, m; /* avances en periodos, cursos y reseteo de offset */
-  int n      = instance->n_courses / instance->n_periods;
-  int offset = instance->n_courses - n*instance->n_periods;
+  unsigned short int j;
+  unsigned short int i = 0;
+  unsigned short int cpp;
+  unsigned short int cred;
+  unsigned short int optimal_load = optimum(instance) + 1;
 
-  i = 0;
-  j = 0;
+  for (j = 0; j < instance->n_courses; j++) {
+    cpp  = courses_per_period(instance, i) + 1;
+    cred = credits(instance, i) + instance->credits[j];
 
-  for (m = 0, k = 0; k < offset*(n+1); k++) {
+    /* 1. Nos pasamos de los cursos maximos al agregar este? */
+    /* 2. Nos pasamos de los creditos maximos al agregar este? */
+    if ( cpp > instance->max_courses || cred > optimal_load)
+      i = (i + 1) % instance->n_periods;
+
     instance->period[j] = i;
-    if (++m % (n+1) == 0){
-      fix_collitions(instance, i);
-      i++;
-    }
-    j++;
-  }
-  for (m = 0, k = 0; k < (instance->n_periods - offset) * n; k++) {
-    instance->period[j] = i;
-
-    if (++m % n == 0) {
-      fix_collitions(instance, i);
-      i++;
-    }
-    j++;
+    fix_collitions(instance, i);
   }
 }
 
@@ -58,8 +54,9 @@ void fix_collitions(struct bacp_instance *instance, unsigned short int i)
     if (instance->period[j] != i) continue;
 
     /* Fix prerequs */
-    for (k = j+1; k < instance->n_courses; k++) {
+    for (k = j + 1; k < instance->n_courses; k++) {
       if (j == k || instance->period[k] != i) continue;
+
       if (is_prereq_of(instance, k, j))
         instance->period[k] = (instance->period[k] + 1)%instance->n_periods;
     }
@@ -90,12 +87,12 @@ unsigned int cost(struct bacp_instance *instance)
     /* Penalizacion por cantidad de cursos por periodo */
     cpp = courses_per_period(instance, i);
     if ( cpp < instance->min_courses || instance->max_courses < cpp )
-      total_penalty += PENALTY_CREDITS;
+      total_penalty += PENALTY_COURSES;
 
     /* Penalizacion por cantidad de creditos por periodo */
     cpp = credits(instance, i);
     if ( cpp < instance->min_load || instance->max_load < cpp )
-      total_penalty += PENALTY_COURSES;
+      total_penalty += PENALTY_CREDITS;
 
   }
 
@@ -138,19 +135,19 @@ unsigned short int *neighbour(struct bacp_instance *instance)
  * Loop principal del algoritmo Simulated Annealing.
  *
  * @instance  :: Instancia del BACP
- * @iter      :: Numero maximo de iteraciones para una temperatura fija t_current
+ * @iter      :: Numero maximo de iteraciones para una temperatura t_current
  * @t_current :: Temperatura inicial
  * @t_min     :: Temperatura minima (eps)
  * @alpha     :: Velocidad de decaimiento de la temperatura
  */
 void run(struct bacp_instance *instance, int iter, float t_current, float t_min, float alpha)
 {
-  unsigned short int *s_best   = copy_solution(instance->period, instance->n_courses);
+  unsigned short int i;
+  unsigned short int new_cost;
   unsigned short int *s_c      = instance->period;
   unsigned short int old_cost  = cost(instance);
   unsigned short int best_cost = old_cost;
-  unsigned short int new_cost;
-  unsigned short int i;
+  unsigned short int *s_best   = copy_solution(instance->period, instance->n_courses);
 
   instance->period = NULL;
   while (t_current > t_min) {
@@ -210,7 +207,9 @@ float aceptar()
 unsigned short int *copy_solution(unsigned short int *old, unsigned short int size)
 {
   unsigned short int i;
-  unsigned short int *copy = (unsigned short int *)malloc(sizeof(unsigned short int) * size);
+  unsigned short int *copy;
+
+  copy = (unsigned short int *)malloc(sizeof(unsigned short int) * size);
 
   for (i = 0; i < size; i++)
     copy[i] = old[i];
