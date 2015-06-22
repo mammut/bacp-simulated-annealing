@@ -130,3 +130,21 @@ int is_prereq_of(struct bacp_instance *instance, unsigned short int a, unsigned 
   return 0;
 }
 
+/**
+ * Calcula el optimo de creditos de una instancia del BACP dada
+ * la cantidad de creditos totales y el numero de periodos
+ *
+ * @instance :: Instancia del BACP
+ *
+ * @return   :: optimo
+ */
+unsigned short int optimum(struct bacp_instance *instance)
+{
+  unsigned short int j;
+  unsigned short int total = 0;
+
+  for(j = 0; j < instance->n_courses; j++)
+    total += instance->credits[j];
+
+  return ceil(1.0 * total/instance->n_periods + 0.0001);
+}

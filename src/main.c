@@ -40,11 +40,11 @@ int main(int argc, char *argv[])
 
   begin = clock();
   initial_solution(instance); /* 1. Greedy init */
-  run(instance, iter, t_current, t_min, alpha); /* 2. Simulated annealing */
+  run(instance, iter, t_current, t_min, alpha); /* 2. Simulated annealing :: Comentar esta linea para ver asignacion original del greedy */
   end = clock();
 
   if (min_output) { /* Minimum output, usado por evaluate.py */
-    printf("%d %d %f", max_credits(instance), cost(instance), (double)(end - begin) / CLOCKS_PER_SEC);
+    printf("%d %d %f %d", max_credits(instance), cost(instance), (double)(end - begin) / CLOCKS_PER_SEC, optimum(instance));
   } else {
     for (i = 0; i < instance->n_periods; i++) {
       printf("Periodo %d\n", i + 1);
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
       printf(" : %d\n", credits(instance, i));
     }
     printf("\nMaxima carga academica: %d\n", max_credits(instance));
+    printf("\nCosto: %d\n", cost(instance));
     printf("Tiempo de ejecucion: %f s\n", (double)(end - begin) / CLOCKS_PER_SEC);
   }
 
