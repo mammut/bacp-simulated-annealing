@@ -96,6 +96,7 @@ sftp-config.json
 *.vrb
 *.xdy
 *.tdo
+*.fls
 
 
 ### OSX ###
@@ -131,3 +132,5 @@ Temporary Items
 
 ### BACP ###
 bacp
+oscar
+MRP

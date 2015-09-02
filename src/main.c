@@ -49,11 +49,13 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
 
     default:
       return ARGP_ERR_UNKNOWN;
-    }
+  }
   return 0;
 }
 
 static struct argp argp = { options, parse_opt, args_doc, doc };
+
+
 
 /**
  * Main BACP Solver, Greedy + Simulated annealing
@@ -106,4 +108,5 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+
 

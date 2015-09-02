@@ -159,12 +159,7 @@ void run(struct bacp_instance *instance, int iter, float t_current, float t_min,
       instance->period = neighbour(instance);
       new_cost         = cost(instance);
 
-      if (new_cost < old_cost) {
-        free(s_c);
-        s_c              = instance->period;
-        old_cost         = new_cost;
-        instance->period = NULL;
-      } else if (exp(-abs(new_cost - old_cost)/t_current) > aceptar()) {
+      if (new_cost < old_cost || (exp(-abs(new_cost - old_cost)/t_current) > aceptar())) {
         free(s_c);
         s_c              = instance->period;
         old_cost         = new_cost;

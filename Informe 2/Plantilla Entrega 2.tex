@@ -1,33 +1,19 @@
-%% LyX 2.1.2 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[10pt,spanish,letterpaper]{article}
-\usepackage[latin1]{inputenc}
-\usepackage{geometry}
-\geometry{verbose,headheight=1.5cm,headsep=0.5cm,footskip=1.5cm}
-
+\documentclass[letterpaper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm]{geometry}
 \usepackage{multirow}
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% \usepackage{biblatex}
 
 \renewcommand{\arraystretch}{1.2}
-
-\makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage[spanish]{babel}
-\usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage{url}
-
-\makeatother
-
-\usepackage{babel}
-\addto\shorthandsspanish{\spanishdeactivate{~<>}}
 
 \begin{document}
 
@@ -46,13 +32,13 @@
 %--------------------No borrar esta secci\'on--------------------------------%
 
 
-\section*{EvaluaciÛn}
+\section*{Evaluaci√≥n}
 
 \begin{tabular}{ll}
 Mejoras 1ra Entrega (10 \%):  & \underline{\hspace{2cm}}\tabularnewline
-CÛdigo Fuente (10 \%):  & \underline{\hspace{2cm}}\tabularnewline
-RepresentaciÛn (15 \%):  & \underline{\hspace{2cm}} \tabularnewline
-DescripciÛn del algoritmo (20 \%):  & \underline{\hspace{2cm}} \tabularnewline
+C√≥digo Fuente (10 \%):  & \underline{\hspace{2cm}}\tabularnewline
+Representaci√≥n (15 \%):  & \underline{\hspace{2cm}} \tabularnewline
+Descripci√≥n del algoritmo (20 \%):  & \underline{\hspace{2cm}} \tabularnewline
 Experimentos (10 \%):  & \underline{\hspace{2cm}} \tabularnewline
 Resultados (10 \%):  & \underline{\hspace{2cm}} \tabularnewline
 Conclusiones (20 \%):  & \underline{\hspace{2cm}}\tabularnewline
@@ -60,20 +46,21 @@ Bibliograf\'{i}a (5 \%):  & \underline{\hspace{2cm}}\tabularnewline
  & \tabularnewline
 \textbf{Nota Final (100)}:  & \underline{\hspace{2cm}} \tabularnewline
 \end{tabular}%---------------------------------------------------------------------------%
+\vspace{2cm}
 \begin{abstract}
-% Resumen del informe en no m·s de 10 lÌneas, donde se sintetice el
+% Resumen del informe en no m√°s de 10 l√≠neas, donde se sintetice el
 % problema que se trata y sirva para que un lector no involucrado comprenda
-% el objetivo del documento. \textbf{Adem·s, deberÌa tener una pequeÒa
-% sÌntesis del acercamiento que se utiliza en cada trabajo, con los
-% resultados m·s destacables o logros en los experimentos realizados.}
-Balanced Academic Curriculum Problem, tambiÈn llamado BACP,
+% el objetivo del documento. \textbf{Adem√°s, deber√≠a tener una peque√±a
+% s√≠ntesis del acercamiento que se utiliza en cada trabajo, con los
+% resultados m√°s destacables o logros en los experimentos realizados.}
+Balanced Academic Curriculum Problem, tambi√©n llamado BACP,
 es un problema que busca asignar los ramos de una malla curricular
 en diferentes periodos de manera balanceada para que los alumnos
 puedan cursar exitosamente los ramos dependiendo de la carga (cr\'editos)
 de estos, cumpliendo restricciones asociadas al la cantidad de ramos y
-carga en cada periÛdo. El BACP es un problema recurrente en universidades
-de todo el mundo, pero tambi\'en puede ser aplicado en otras ·reas
-como la asignaciÛn de carga de trabajo para los empleados de una
+carga en cada peri√≥do. El BACP es un problema recurrente en universidades
+de todo el mundo, pero tambi\'en puede ser aplicado en otras √°reas
+como la asignaci√≥n de carga de trabajo para los empleados de una
 empresa. En este informe se presenta el estado del arte del BACP
 resumiendo los diferentes enfoques que se han publicado para
 resolver este problema desde que fue publicado, comparando
@@ -81,64 +68,64 @@ las t\'ecnicas utilizadas y los resultados.
 
 \end{abstract}
 
-\section{IntroducciÛn}
+\section{Introducci√≥n}
 
-% Una explicaciÛn breve del contenido del informe. Es decir, detalla:
-% PropÛsito, \textbf{Estructura del Documento actualizada con los contenidos
-% del entregable 2}, DescripciÛn (muy breve) del Problema y MotivaciÛn.
-% \textbf{DeberÌa contener adem·s las correcciones solicitadas por el
-% ayudante, adem·s de hablar del acercamiento que se utiliza en cada
-% trabajo, asÌ como indicar informaciÛn de los experimentos realizados.}
+% Una explicaci√≥n breve del contenido del informe. Es decir, detalla:
+% Prop√≥sito, \textbf{Estructura del Documento actualizada con los contenidos
+% del entregable 2}, Descripci√≥n (muy breve) del Problema y Motivaci√≥n.
+% \textbf{Deber√≠a contener adem√°s las correcciones solicitadas por el
+% ayudante, adem√°s de hablar del acercamiento que se utiliza en cada
+% trabajo, as√≠ como indicar informaci√≥n de los experimentos realizados.}
 
-Hoy en dÌa las entidades universitarias ofrecen distintas carreras a sus alumnos, estas carreras comprenden una malla curricular con ciertos ramos, que llevan asociado una dificultad. La correcta distribuciÛn de los ramos en los periodos acadÈmicos puede influir en el Èxito o fracaso de los alumnos para terminar su carrera satisfactoriamente.
-Los ramos pueden comprender de ciertos prerequisitos para ser cursados (e.g., matem·ticas 2 necesita matem·ticas 1). Adem·s los ramos pueden cambiar su nivel de exigencia para cursarlo exitosamente, lo que se le denominar· crÈditos de ahora en adelante.
+Hoy en d√≠a las entidades universitarias ofrecen distintas carreras a sus alumnos, estas carreras comprenden una malla curricular con ciertos ramos, que llevan asociado una dificultad. La correcta distribuci√≥n de los ramos en los periodos acad√©micos puede influir en el √©xito o fracaso de los alumnos para terminar su carrera satisfactoriamente.
+Los ramos pueden comprender de ciertos prerequisitos para ser cursados (e.g., matem√°ticas 2 necesita matem√°ticas 1). Adem√°s los ramos pueden cambiar su nivel de exigencia para cursarlo exitosamente, lo que se le denominar√° cr√©ditos de ahora en adelante.
 
-Un problema natural que surge es como asignar los ramos de la malla curricular de manera balanceada en su carga, i.e., que los crÈditos de los ramos de un periodo especÌfico no sean desmedidos, pero que a su vez termine la carrera en un tiempo razonable estableciendo una cantidad m·xima y mÌnima de ramos y crÈditos por periodo. A esto se le conoce como el Balanced Academic Curriculum Problem (BACP).
+Un problema natural que surge es como asignar los ramos de la malla curricular de manera balanceada en su carga, i.e., que los cr√©ditos de los ramos de un periodo espec√≠fico no sean desmedidos, pero que a su vez termine la carrera en un tiempo razonable estableciendo una cantidad m√°xima y m√≠nima de ramos y cr√©ditos por periodo. A esto se le conoce como el Balanced Academic Curriculum Problem (BACP).
 
-El BACP puede ser aplicado en otras ·reas como es la asignaciÛn de carga de trabajo para los empleados de una empresa basada en turnos, e.g., carga y horarios de las enfermeras de un hospital~\cite{IOPORT.06373100}
+El BACP puede ser aplicado en otras √°reas como es la asignaci√≥n de carga de trabajo para los empleados de una empresa basada en turnos, e.g., carga y horarios de las enfermeras de un hospital~\cite{IOPORT.06373100}
 
-En este informe se presentan en forma resumida los distintos mÈtodos, tÈcnicas y enfoques que han publicado los investigadores para representar y resolver el BACP comparando el rendimiento y la calidad de las soluciones. El informe esta organizado de la siguiente manera: En la secciÛn 2 se define el problema y se muestran variantes, en la secciÛn 3 se presentan los estudios realizados anteriormente haciendo comparaciones, luego en la secciÛn 4 se establecen distintos modelos matem·ticos y por ˙ltimo en la secciÛn 5 se concluye y plantean futuras lÌneas de investigaciÛn.
+En este informe se presenta en forma resumida los distintos m√©todos, t√©cnicas y enfoques que han publicado los investigadores para representar y resolver el BACP comparando el rendimiento y la calidad de las soluciones. El informe esta organizado de la siguiente manera: En la secci√≥n 2 se define el problema y se muestran variantes, en la secci√≥n 3 se presentan los estudios realizados anteriormente haciendo comparaciones, luego en la secci√≥n 4 se establecen distintos modelos matem√°ticos y por √∫ltimo en la secci√≥n 5 se concluye y plantean futuras l√≠neas de investigaci√≥n.
 
 
 
-\section{DefiniciÛn del Problema}
+\section{Definici√≥n del Problema}
 
-% ExplicaciÛn del problema que se va a estudiar, en quÈ consiste, cu·les
+% Explicaci√≥n del problema que se va a estudiar, en qu√© consiste, cu√°les
 % son sus variables, restricciones y objetivo(s) de manera general (en
-% palabras, no una formulaciÛn matem·tica). Debe entenderse claramente
-% el problema y quÈ busca resolver. Explicar si existen problemas relacionados.
-% Destacar, si existen, las variantes m·s conocidas.\\
-%  Redactar en tercera persona, sin faltas de ortografÌa y referenciar
+% palabras, no una formulaci√≥n matem√°tica). Debe entenderse claramente
+% el problema y qu√© busca resolver. Explicar si existen problemas relacionados.
+% Destacar, si existen, las variantes m√°s conocidas.\\
+%  Redactar en tercera persona, sin faltas de ortograf√≠a y referenciar
 % correctamente sus fuentes mediante el comando \verb+\cite{ }+. Por
-% ejemplo, para hacer referencia al artÌculo de algoritmos hÌbridos
-% para problemas de satisfacciÛn de restricciones~\cite{Prosser93Hybrid}.\textbf{
-% DeberÌa contener adem·s las correcciones solicitadas por el ayudante.}
+% ejemplo, para hacer referencia al art√≠culo de algoritmos h√≠bridos
+% para problemas de satisfacci√≥n de restricciones~\cite{Prosser93Hybrid}.\textbf{
+% Deber√≠a contener adem√°s las correcciones solicitadas por el ayudante.}
 
 \subsection{BACP: el problema}
-El BACP definido originalmente en~\cite{csplibprob030} busca resolver un problema recurrente para las universidades, asignaciÛn los ramos de una malla curricular en distintos periodos, balanceando la carga acadÈmica (i.e., similitud entre la carga de todos los periodos), pero a la vez cumpliendo con restricciones de precedencia y lÌmites de exigencias y cantidad de ramos por periodo.
+El BACP definido originalmente en~\cite{csplibprob030} busca resolver un problema recurrente para las universidades, asignaci√≥n los ramos de una malla curricular en distintos periodos, balanceando la carga acad√©mica (i.e., similitud entre la carga de todos los periodos), pero a la vez cumpliendo con restricciones de precedencia y l√≠mites de exigencias y cantidad de ramos por periodo.
 
 Ha sido demostrado que el BACP es un problema NP-complete~\cite{balac,Monette07acp}
 
-\subsection{DefiniciÛn del Modelo}
+\subsection{Definici√≥n del Modelo}
 El BACP definido en~\cite{DBLP:journals/corr/cs-PL-0110007} comprende
 los siguientes elementos:
 
-Una malla curricular es un conjunto de ramos que al completarlos se obtiene un tÌtulo universitario. Cada malla curricular tiene definida una cantidad de periodos en que los ramos deben ser completados.
+Una malla curricular es un conjunto de ramos que al completarlos se obtiene un t√≠tulo universitario. Cada malla curricular tiene definida una cantidad de periodos en que los ramos deben ser completados.
 
-Los ramos pueden tener distintas dificultades que se relaciona al esfuerzo que un alumno debe aplicar para completar satisfactoriamente dicho ramo, es por esto que se le asocia a los ramos un n\'umero de crÈditos que representa el esfuerzo necesario para completar satisfactoriamente el ramo.
+Los ramos pueden tener distintas dificultades que se relaciona al esfuerzo que un alumno debe aplicar para completar satisfactoriamente dicho ramo, es por esto que se le asocia a los ramos un n\'umero de cr√©ditos que representa el esfuerzo necesario para completar satisfactoriamente el ramo.
 
-Por otra parte algunos ramos pueden tener prerequisitos que definen una precedencia al ser cursados, es decir, si el ramo $\beta$ tiene como prerequisito al ramo $\alpha$, entonces $\beta$ debe estar en un periodo acadÈmico posterior al periodo en que se encuentra asignado $\alpha$.
+Por otra parte algunos ramos pueden tener prerequisitos que definen una precedencia al ser cursados, es decir, si el ramo $\beta$ tiene como prerequisito al ramo $\alpha$, entonces $\beta$ debe estar en un periodo acad√©mico posterior al periodo en que se encuentra asignado $\alpha$.
 
-La carga acadÈmica de un periodo es la suma de los crÈditos de los ramos que est·n presentes en dicho periodo. Esta carga acadÈmica debe cumplir un m·ximo para prevenir sobrecarga y un mÌnimo para ser considerado un estudiante de tiempo completo. AsÌ mismo se establece un m·ximo y un mÌnimo de ramos por periodo.
+La carga acad√©mica de un periodo es la suma de los cr√©ditos de los ramos que est√°n presentes en dicho periodo. Esta carga acad√©mica debe cumplir un m√°ximo para prevenir sobrecarga y un m√≠nimo para ser considerado un estudiante de tiempo completo. As√≠ mismo se establece un m√°ximo y un m√≠nimo de ramos por periodo.
 
-El problema consiste en encontrar una asignaciÛn de los ramos en los distintos periodos. Dicha asignaciÛn debe satisfacer las restricciones de prerequisitos, m·ximo y mÌnimo de crÈditos por periodo, y m·ximo y mÌnimo de ramos por periodo.
-El Ûptimo busca minimizar la m·xima carga acadÈmica de los periodos~\cite{DBLP:journals/corr/cs-PL-0110007} o minimizar la diferencias de carga entre los periodos~\cite{Monette07acp}.
+El problema consiste en encontrar una asignaci√≥n de los ramos en los distintos periodos. Dicha asignaci√≥n debe satisfacer las restricciones de prerequisitos, m√°ximo y m√≠nimo de cr√©ditos por periodo, y m√°ximo y m√≠nimo de ramos por periodo.
+El √≥ptimo busca balancear la carga ya sea minimizando la m√°xima carga acad√©mica de los periodos~\cite{DBLP:journals/corr/cs-PL-0110007} o minimizando la diferencias de carga entre los periodos~\cite{Monette07acp}.
 
 \subsection{Problemas similares y variantes}
 
-El BACP es muy similar a problemas como el bin-packing, scheduling y balancing problems~\cite{Monette07acp}, e.g., los prerequisitos del BACP lo hacen similar al scheduling problem asignando precedencia en intervalos de tiempo.
+El BACP es muy similar a problemas como el bin-packing, scheduling y balancing problems, e.g., los prerequisitos del BACP lo hacen similar al scheduling problem asignando precedencia en intervalos de tiempo. Cae en la clase de problemas en que se tiene un conjunto de objetos de diferentes tama√±os los cuales deben ser almacenados en un conjunto de contenedores de capacidad finita, los intervalos de tiempo se asemejan al orden en que los objetos son asignados~\cite{Monette07acp}.
 
-La principal variante a este problema es la GBACP presentada en~\cite{GbacpGaspero}. Esta variante agrega nuevas formulaciones que representan mejor el problema real de las universidades, e.g., se da la posibilidad de compartir ramos de mallas curriculares diferentes, incluir la disponibilidad y preferencia de los profesores al momento de asignar los ramos en periodos especÌficos y le da la posibilidad a los alumnos de elegir ciertos ramos.
+La principal variante a este problema es la GBACP presentada en~\cite{GbacpGaspero}. Esta variante agrega nuevas formulaciones que representan mejor el problema real de las universidades, e.g., se da la posibilidad de compartir ramos de mallas curriculares diferentes, incluir la disponibilidad y preferencia de los profesores al momento de asignar los ramos en periodos espec√≠ficos y le da la posibilidad a los alumnos de elegir ciertos ramos.
 
 
 
@@ -147,27 +134,27 @@ La principal variante a este problema es la GBACP presentada en~\cite{GbacpGaspe
 
 \section{Estado del Arte}
 
-% La informaciÛn que describen en este punto se basa en los estudios
-% realizados con antelaciÛn respecto al tema. Lo m·s importante que
-% se ha hecho hasta ahora con relaciÛn al problema. DeberÌa responder
-% preguntas como las siguientes: ?`cu·ndo surge?, ?`quÈ mÈtodos se han
-% usado para resolverlo?, ?`cu·les son los mejores algoritmos que se
-% han creado hasta la fecha?, ?`quÈ representaciones han tenido los
-% mejores resultados?, ?`cu·l es la tendencia actual para resolver el
-% problema?, tipos de movimientos, heurÌsticas, mÈtodos completos, tendencias,
-% etc... Puede incluir gr·ficos comparativos o explicativos. \textbf{DeberÌa
-% contener adem·s las correcciones solicitadas por el ayudante.}
+% La informaci√≥n que describen en este punto se basa en los estudios
+% realizados con antelaci√≥n respecto al tema. Lo m√°s importante que
+% se ha hecho hasta ahora con relaci√≥n al problema. Deber√≠a responder
+% preguntas como las siguientes: ?`cu√°ndo surge?, ?`qu√© m√©todos se han
+% usado para resolverlo?, ?`cu√°les son los mejores algoritmos que se
+% han creado hasta la fecha?, ?`qu√© representaciones han tenido los
+% mejores resultados?, ?`cu√°l es la tendencia actual para resolver el
+% problema?, tipos de movimientos, heur√≠sticas, m√©todos completos, tendencias,
+% etc... Puede incluir gr√°ficos comparativos o explicativos. \textbf{Deber√≠a
+% contener adem√°s las correcciones solicitadas por el ayudante.}
 
 \subsection{Origen del problema}
 
-El BACP fue propuesto en 1990 por Hnich et al.,~\cite{csplibprob030} y publicado en CSPlib\footnote{CSPLib es una librerÌa con m˙ltiples problemas de prueba para solvers de satisfacciÛn de restricciones.}
-Los primeros en abordar el problema fueron Castro y Manzano~\cite{DBLP:journals/corr/cs-PL-0110007}. Ellos presentan dos mÈtodos para resolver el problema, el primero consiste en un modelo de programaciÛn entera que resuelven utilizando \verb+lp_solve+\footnote{Solver para programaciÛn lineal entera mixta. http://lpsolve.sourceforge.net/5.5/}. El segundo en un modelo basado en restricciones utilizando heurÌsticas de orden de instanciaciÛn de variables y asignaciÛn de valores utilizando el lenguaje Oz\footnote{Lenguaje de programaciÛn Mozart http://mozart.github.io/}. Al ser los primeros en abordar el problema, hicieron p˙blico en CSPlib tres mallas curriculares las cuales utilizaron en su experimentaciÛn. bacp8 una instancia de 8 periodos, bacp10 una instancia de 10 periodos y bacp12 una instancia de 12 periodos, las cuales corresponden a las tres carreras de inform·tica que se imparten en la Universidad TÈcnica Federico Santa MarÌa. Estas instancias se convierten en las utilizadas por la mayorÌa de los investigadores posteriores para tener resultados comparables.
+El BACP fue propuesto en 1990 por Hnich et al.,~\cite{csplibprob030} y publicado en CSPlib\footnote{CSPLib es una librer√≠a con m√∫ltiples problemas de prueba para solvers de satisfacci√≥n de restricciones.}
+Los primeros en abordar el problema fueron Castro y Manzano~\cite{DBLP:journals/corr/cs-PL-0110007}. Ellos presentan dos m√©todos para resolver el problema, el primero consiste en un modelo de programaci√≥n entera que resuelven utilizando \verb+lp_solve+\footnote{Solver para programaci√≥n lineal entera mixta. http://lpsolve.sourceforge.net/5.5/}. El segundo en un modelo basado en restricciones utilizando heur√≠sticas de orden de instanciaci√≥n de variables y asignaci√≥n de valores utilizando el lenguaje Oz\footnote{Lenguaje de programaci√≥n Mozart http://mozart.github.io/}. Al ser los primeros en abordar el problema, hicieron p√∫blico en CSPlib tres mallas curriculares las cuales utilizaron en su experimentaci√≥n. bacp8 una instancia de 8 periodos, bacp10 una instancia de 10 periodos y bacp12 una instancia de 12 periodos, las cuales corresponden a las tres carreras de inform√°tica que se imparten en la Universidad T√©cnica Federico Santa Mar√≠a. Estas instancias se convierten en las utilizadas por la mayor√≠a de los investigadores posteriores para tener resultados comparables.
 
 \subsection{Primeros acercamientos: ILP y CP}
 
-Los primeros acercamientos realizados por Castro y Manzano,~\cite{DBLP:journals/corr/cs-PL-0110007} se basaron en la comparaciÛn de programaciÛn entera en contraste con programaciÛn de restricciones utilizando heurÌsticas de orden de instanciaciÛn de variables y asignaciÛn de valores. Los tiempos de ejecuciÛn para los datasets engregados bacp8, bacp10 y bacp10 fueron los siguientes.
+Los primeros acercamientos realizados por Castro y Manzano,~\cite{DBLP:journals/corr/cs-PL-0110007} se basaron en la comparaci√≥n de programaci√≥n entera en contraste con programaci√≥n de restricciones utilizando heur√≠sticas de orden de instanciaci√≥n de variables y asignaci√≥n de valores. Los tiempos de ejecuci√≥n para los datasets engregados bacp8, bacp10 y bacp10 fueron los siguientes.
 
-Los resultados se observan en la siguiente tabla muestran el tiempo que tomo a cada mÈtodo en las distintas instancias de CSPlib, comparando el tiempo que tomo en encontrar la soluciÛn Ûptima.
+Los resultados se observan en la siguiente tabla muestran el tiempo que tomo a cada m√©todo en las distintas instancias de CSPlib, comparando el tiempo que tomo en encontrar la soluci√≥n √≥ptima.
 
 \begin{table}[H]
   \centering
@@ -181,29 +168,29 @@ Los resultados se observan en la siguiente tabla muestran el tiempo que tomo a c
       & & ingenuo & inverso & \phantom{a} & ingenuo & inverso\\
     \midrule
     \textsc{8 periodos}\\
-    \multicolumn{1}{r}{Primera soluciÛn} & 1.7 [s] & 0.1 [s] & 0.1 [s] & \phantom{a} & 0.2 [s] & 0.1 [s]\\
-    \multicolumn{1}{r}{Mejor soluciÛn}   & 1479.7 [s] & $\infty$ & 0.1 [s] & \phantom{a} & $\infty$ & 0.1 [s]\\
+    \multicolumn{1}{r}{Primera soluci√≥n} & 1.7 [s] & 0.1 [s] & 0.1 [s] & \phantom{a} & 0.2 [s] & 0.1 [s]\\
+    \multicolumn{1}{r}{Mejor soluci√≥n}   & 1479.7 [s] & $\infty$ & 0.1 [s] & \phantom{a} & $\infty$ & 0.1 [s]\\
     \textsc{10 periodos}\\
-    \multicolumn{1}{r}{Primera soluciÛn} & 5.9 [s] & 0.2 [s] & 0.1 [s] & \phantom{a} & 0.2 [s] & 0.1 [s]\\
-    \multicolumn{1}{r}{Mejor soluciÛn}   & $\infty$ & 3.6 [s] & 0.1 [s] & \phantom{a} & $\infty$ & 0.1 [s]\\
+    \multicolumn{1}{r}{Primera soluci√≥n} & 5.9 [s] & 0.2 [s] & 0.1 [s] & \phantom{a} & 0.2 [s] & 0.1 [s]\\
+    \multicolumn{1}{r}{Mejor soluci√≥n}   & $\infty$ & 3.6 [s] & 0.1 [s] & \phantom{a} & $\infty$ & 0.1 [s]\\
     \textsc{12 periodos}\\
-    \multicolumn{1}{r}{Primera soluciÛn} & $\infty$ & 0.4 [s] & 0.5 [s] & \phantom{a} & $\infty$ & 0.3 [s]\\
-    \multicolumn{1}{r}{Mejor soluciÛn}   & $\infty$ & $\infty$ & 0.3 [s] & \phantom{a} & $\infty$ & 0.3 [s]\\
+    \multicolumn{1}{r}{Primera soluci√≥n} & $\infty$ & 0.4 [s] & 0.5 [s] & \phantom{a} & $\infty$ & 0.3 [s]\\
+    \multicolumn{1}{r}{Mejor soluci√≥n}   & $\infty$ & $\infty$ & 0.3 [s] & \phantom{a} & $\infty$ & 0.3 [s]\\
     \bottomrule
   \end{tabular}
   \caption{Sumario comparativo del rendimiento entre lp\_solve y Oz~\cite{DBLP:journals/corr/cs-PL-0110007}}
 \end{table}
 
-Notaron de inmediato que las heurÌsticas utilizadas en Oz eran muy superiores a los resultados que lograba \verb+lp_solve+, Se observa que el modelo de programaciÛn entera no logrÛ obtener resultados para el problema de 12 periodos.
-\verb+lp_solve+ no pudo encontrar el resultado Ûptimo, pues solo llego a 24 crÈditos en 1626.84 segundos.
+Notaron de inmediato que las heur√≠sticas utilizadas en Oz eran muy superiores a los resultados que lograba \verb+lp_solve+, Se observa que el modelo de programaci√≥n entera no logr√≥ obtener resultados para el problema de 12 periodos.
+\verb+lp_solve+ no pudo encontrar el resultado √≥ptimo, pues solo llego a 24 cr√©ditos en 1626.84 segundos.
 
-\subsection{Modelos HÌbridos}
+\subsection{Modelos H√≠bridos}
 
-El aÒo 2002 Hnich et al.~\cite{Hnich02modellinga} publican una nueva tÈcnica para resolver el problema. Presentan un nuevo modelo de CP, pero no se quedan ahÌ, lo que hacen son experimentos hÌbridos mezclando las tÈcnicas definidas en~\cite{DBLP:journals/corr/cs-PL-0110007} con nuevos modelos de CP que definen nuevos espacios de b˙squeda.
+El a√±o 2002 Hnich et al.~\cite{Hnich02modellinga} publican una nueva t√©cnica para resolver el problema. Presentan un nuevo modelo de CP, pero no se quedan ah√≠, lo que hacen son experimentos h√≠bridos mezclando las t√©cnicas definidas en~\cite{DBLP:journals/corr/cs-PL-0110007} con nuevos modelos de CP que definen nuevos espacios de b√∫squeda.
 
-El nuevo modelo ($CP_2$) modifica la representaciÛn de los periodos en el que se le asigna al ramo i-Èsimo un periodo especÌfico utilizando un arreglo (1d), a diferencia del modelo presentado en~\cite{DBLP:journals/corr/cs-PL-0110007} ($CP_1$) en que se representaba una matriz (2d) binaria. Lo que se logrÛ fue un modelo mas eficiente al eliminar variables binarias necesarias en las restricciones dada la nueva representaciÛn de un arreglo unidimensional disminuyendo el espacio de b˙squeda.
+El nuevo modelo ($CP_2$) modifica la representaci√≥n de los periodos en el que se le asigna al ramo i-√©simo un periodo espec√≠fico utilizando un arreglo (1d), a diferencia del modelo presentado en~\cite{DBLP:journals/corr/cs-PL-0110007} ($CP_1$) en que se representaba una matriz (2d) binaria. Lo que se logr√≥ fue un modelo mas eficiente al eliminar variables binarias necesarias en las restricciones dada la nueva representaci√≥n de un arreglo unidimensional disminuyendo el espacio de b√∫squeda.
 
-Las posibles mezclas de algoritmos hÌbridos incluyen: $ILP + CP_2$ y $CP_1 + CP_2$. La idea detr·s de estos algoritmos hÌbridos era la de lograr reducir el espacio de b˙squeda podando soluciones infactibles. Lo ideal es que el algoritmo hÌbrido utilice lo mejor de cada uno de los algoritmos que lo componen.
+Las posibles mezclas de algoritmos h√≠bridos incluyen: $ILP + CP_2$ y $CP_1 + CP_2$. La idea detr√°s de estos algoritmos h√≠bridos era la de lograr reducir el espacio de b√∫squeda podando soluciones infactibles. Lo ideal es que el algoritmo h√≠brido utilice lo mejor de cada uno de los algoritmos que lo componen.
 
 Los resultados que obtuvieron fueron los siguientes:
 
@@ -222,18 +209,18 @@ Los resultados que obtuvieron fueron los siguientes:
     $CP_1 + CP_2$ & 0.29 & 651 & \phantom{c} & 0.59 & 1736 & \phantom{c} & 1.09 & 1539\\
     \bottomrule
   \end{tabular}
-  \caption{Encontrando una soluciÛn Ûptima}
+  \caption{Encontrando una soluci√≥n √≥ptima}
 \end{table}
 
-El modelo mas r·pido en encontrar una soluciÛn optima fue el hÌbrido entre $CP_1$ y $CP_2$, este modelo logrÛ reducir el espacio de b˙squeda que compensÛ el incremento del uso de variables y restricciones debido al uso hÌbrido de ambos algoritmos.
+El modelo mas r√°pido en encontrar una soluci√≥n optima fue el h√≠brido entre $CP_1$ y $CP_2$, este modelo logr√≥ reducir el espacio de b√∫squeda que compens√≥ el incremento del uso de variables y restricciones debido al uso h√≠brido de ambos algoritmos.
 
-Este trabajo dio pie a seguir investigando en la linea de modelos hÌbridos. Uno de ellos es el uso de Algoritmos GenÈticos y PropagaciÛn de restricciones~\cite{Rutkowski}. En esta investigaciÛn utilizan un framework genÈrico de hibridaciÛn. El framework desarrollado les permite especificar la proporciÛn de los mÈtodos, ajustando cuanto tiempo se asigna al GA o al CP. De esa forma pudieron realizar diferentes pruebas cambiando el tiempo que GA o CP tiene destinado en el algoritmo hÌbrido. De todas formas el principal aporte de esta investigaciÛn fue el framework utilizado que les permitiÛ controlar la proporciÛn entre los algoritmos que componen al hÌbrido.
+Este trabajo dio pie a seguir investigando en la linea de modelos h√≠bridos. Uno de ellos es el uso de Algoritmos Gen√©ticos y Propagaci√≥n de restricciones~\cite{Rutkowski}. En esta investigaci√≥n utilizan un framework gen√©rico de hibridaci√≥n. El framework desarrollado les permite especificar la proporci√≥n de los m√©todos, ajustando cuanto tiempo se asigna al GA o al CP. De esa forma pudieron realizar diferentes pruebas cambiando el tiempo que GA o CP tiene destinado en el algoritmo h√≠brido. De todas formas el principal aporte de esta investigaci√≥n fue el framework utilizado que les permiti√≥ controlar la proporci√≥n entre los algoritmos que componen al h√≠brido.
 
-Dentro de sus resultados en la investigaciÛn de GA + CP se observa que logra calcular el Ûptimo para las instancias bacp8, bacp10 y bacp12 en 15.05, 34.84 y 35.20 segundos respectivamente, mucho mas r·pido de lo que logra \verb+lp_solve+.
+Dentro de sus resultados en la investigaci√≥n de GA + CP se observa que logra calcular el √≥ptimo para las instancias bacp8, bacp10 y bacp12 en 15.05, 34.84 y 35.20 segundos respectivamente, mucho mas r√°pido de lo que logra \verb+lp_solve+.
 
-\subsection{FunciÛn objetivo alternativa}
+\subsection{Funci√≥n objetivo alternativa}
 
-El 2007 aparece un nuevo ·ngulo para atacar el problema consiste en minimizar la suma de las distancias medias de la carga de cada periodo y la carga promedio total, i.e.,
+El 2007 aparece un nuevo √°ngulo para atacar el problema consiste en minimizar la suma de las distancias medias de la carga de cada periodo y la carga promedio total, i.e.,
 
 \begin{align*}
   \text{min} \; C(p) = \sum_{i=1}^{m} |m\,\alpha_i - w |^p
@@ -243,30 +230,30 @@ donde $\alpha_i$ es la carga del ramo $i$, y $w$ es la carga total~\cite{Monette
 \begin{align*}
   w_i = \sum_{i \in \text{ramos}} \alpha_i
 \end{align*}
- En esta investigaciÛn comparan 4 casos particulares: $C(1), C(2)$, $C(\infty)$ y el mÈtodo cl·sico de~\cite{DBLP:journals/corr/cs-PL-0110007} $C^{max}$. Junto con esta nueva funciÛn objetivo los autores introducen un mÈtodo hÌbrido entre branch-and-bound y Tabu Search como mÈtodo de b˙squeda local. Esto permite encontrar soluciones factibles r·pidamente pero no garantizan el Ûptimo.
-Adem·s sugieren que dada la naturaleza de las instancias (bacp8, bacp10 y bacp12) las restricciones de m·ximos y mÌnimos para la carga por periodo y cantidad de ramos por periodo no es necesario considerarlas, pues las soluciones balanceadas de estas instancias siempre respetan dichas restricciones.
+ En esta investigaci√≥n comparan 4 casos particulares: $C(1), C(2)$, $C(\infty)$ y el m√©todo cl√°sico de~\cite{DBLP:journals/corr/cs-PL-0110007} $C^{max}$. Junto con esta nueva funci√≥n objetivo los autores introducen un m√©todo h√≠brido entre branch-and-bound y Tabu Search como m√©todo de b√∫squeda local. Esto permite encontrar soluciones factibles r√°pidamente pero no garantizan el √≥ptimo.
+Adem√°s sugieren que dada la naturaleza de las instancias (bacp8, bacp10 y bacp12) las restricciones de m√°ximos y m√≠nimos para la carga por periodo y cantidad de ramos por periodo no es necesario considerarlas, pues las soluciones balanceadas de estas instancias siempre respetan dichas restricciones.
 
-Monette et al., aportan con un generador de instancias, el cual utilizan para generar 100 nuevas instancias mas grandes y complejas que las bacp8, bacp10 y bacp12. En sus experimentos concluyen que el mÈtodo hÌbrido de branch-and-bound y Tabu search es mas eficiente para el modelo $C^{max}$, ya que tabu search logra encontrar Ûptimos locales r·pidamente, para que luego branch-and-bound pueda proseguir mejorando soluciones alternativas. Para el caso de minimizar $C(1)$ proponen el mÈtodo iterativo como mejor opciÛn. Es por esto que plantean como futuras lÌneas de investigaciÛn el uso de portafolio de diferentes mÈtodos de b˙squeda especÌficos para cada instancia del BACP.
+Monette et al., aportan con un generador de instancias, el cual utilizan para generar 100 nuevas instancias mas grandes y complejas que las bacp8, bacp10 y bacp12. En sus experimentos concluyen que el m√©todo h√≠brido de branch-and-bound y Tabu search es mas eficiente para el modelo $C^{max}$, ya que tabu search logra encontrar √≥ptimos locales r√°pidamente, para que luego branch-and-bound pueda proseguir mejorando soluciones alternativas. Para el caso de minimizar $C(1)$ proponen el m√©todo iterativo como mejor opci√≥n. Es por esto que plantean como futuras l√≠neas de investigaci√≥n el uso de portafolio de diferentes m√©todos de b√∫squeda espec√≠ficos para cada instancia del BACP.
 
-Dentro de la experimentaciÛn que realizan con las instancias generadas muestran que las instancias con mayor cantidad de requisitos tienden a ser mas f·ciles de responder, m·s a˙n, los problemas que tienen entre un 0\% y un 25\% de prerequisitos tienden a ser difÌciles. La dificultad disminuye considerablemente cuando se pasa el umbral del 25\%~\cite{Monette07acp}. Esto se traduce en cantidad de restricciones, el espacio de b˙squeda del problema inicialmente es muy grande y mientras mas prerequisitos, mas restricciones aparecen. Es f·cil entonces reducir dr·sticamente el espacio de b˙squeda del problema y escapar del estado de transiciÛn\footnote{El estado de transiciÛn es el rango en que un problema es mas difÌcil dada la cantidad de restricciones que el problema presenta.}.
+Dentro de la experimentaci√≥n que realizan con las instancias generadas muestran que las instancias con mayor cantidad de requisitos tienden a ser mas f√°ciles de responder, m√°s a√∫n, los problemas que tienen entre un 0\% y un 25\% de prerequisitos tienden a ser dif√≠ciles. La dificultad disminuye considerablemente cuando se pasa el umbral del 25\%~\cite{Monette07acp}. Esto se traduce en cantidad de restricciones, el espacio de b√∫squeda del problema inicialmente es muy grande y mientras mas prerequisitos, mas restricciones aparecen. Es f√°cil entonces reducir dr√°sticamente el espacio de b√∫squeda del problema y escapar del estado de transici√≥n\footnote{El estado de transici√≥n es el rango en que un problema es mas dif√≠cil dada la cantidad de restricciones que el problema presenta.}.
 
-\subsection{B˙squedas locales hÌbridas}
+\subsection{B√∫squedas locales h√≠bridas}
 
-El aÒo 2008 Di Gaspero y Schaerf~\cite{GbacpGaspero} en donde proponen el GBACP, una variantes m·s compleja del BACP que busca acercar el problema a la realidad, donde hay ciertos aspectos que BACP no considera, algunos de estos son:
-los estudiantes pueden elegir alternativas de ramos e.g., ramos de especialidad, las mallas curriculares pueden compartir ciertos ramos, e.g., matem·ticas y fÌsicas, los profesores pueden dar su disponibilidad y preferencia para dictar un ramo en periodos especÌficos.
+El a√±o 2008 Di Gaspero y Schaerf~\cite{GbacpGaspero} en donde proponen el GBACP, una variantes m√°s compleja del BACP que busca acercar el problema a la realidad, donde hay ciertos aspectos que BACP no considera, algunos de estos son:
+los estudiantes pueden elegir alternativas de ramos e.g., ramos de especialidad, las mallas curriculares pueden compartir ciertos ramos, e.g., matem√°ticas y f√≠sicas, los profesores pueden dar su disponibilidad y preferencia para dictar un ramo en periodos espec√≠ficos.
 
-Para resolver esta variante deciden utilizar mÈtodos de b˙squeda local (Tabu Search, Simulated Annealing, Steepest Descent, entre otros), los cuales aplican como primera instancia a los problemas de CSPlib (bacp8, bacp10 y bacp12), los resultados que obtienen son en general muy buenos, con una tasa de Èxito de 66.23\% promedio para el bacp8. Los mÈtodos Simulated Annealing, Tabu Search y Dynamic Tabu Search obtuvieron una tasa de exito de 100\% para el bacp8 y bacp10, por los que parecen ser los mas apropiados para abordar este problema.
+Para resolver esta variante deciden utilizar m√©todos de b√∫squeda local (Tabu Search, Simulated Annealing, Steepest Descent, entre otros), los cuales aplican como primera instancia a los problemas de CSPlib (bacp8, bacp10 y bacp12), los resultados que obtienen son en general muy buenos, con una tasa de √©xito de 66.23\% promedio para el bacp8. Los m√©todos Simulated Annealing, Tabu Search y Dynamic Tabu Search obtuvieron una tasa de exito de 100\% para el bacp8 y bacp10, por los que parecen ser los mas apropiados para abordar este problema.
 
 
 \subsection{Hormigas y rastros de feromonas}
-Uno de los trabajos mas reciente (2013) sobre el BACP utiliza metaheurÌsticas de Ant Colony Optimization (AOC) en especÌfico el mÈtodo BWAS (Best-Worst Ant System). Esta investigaciÛn muestra como se puede simular el comportamiento de hormigas para lograr satisfacer las restricciones del problema. Para esto se crea un algoritmo modificado de BWAS para actualizar y mutar rastros de feromonas, asÌ como tambiÈn reiniciar el proceso de b˙squeda cuando este se estanca~\cite{IOPORT.06373100}. Fueron capaces de encontrar Ûptimos para los problemas bacp8, bacp10 y bacp12, luego de 100 iteraciones el algoritmo no logra encontrar mejores soluciones, pues ya logrÛ el Ûptimo.
+Uno de los trabajos mas reciente (2013) sobre el BACP utiliza metaheur√≠sticas de Ant Colony Optimization (AOC) en espec√≠fico el m√©todo BWAS (Best-Worst Ant System). Esta investigaci√≥n muestra como se puede simular el comportamiento de hormigas para lograr satisfacer las restricciones del problema. Para esto se crea un algoritmo modificado de BWAS para actualizar y mutar rastros de feromonas, as√≠ como tambi√©n reiniciar el proceso de b√∫squeda cuando este se estanca~\cite{IOPORT.06373100}. Fueron capaces de encontrar √≥ptimos para los problemas bacp8, bacp10 y bacp12, luego de 100 iteraciones el algoritmo no logra encontrar mejores soluciones, pues ya logr√≥ el √≥ptimo.
 
-Este mÈtodo resulto ser muy r·pido para hallar las soluciones Ûptimas, tardando  1.25, 1.92 y 6.37 segundos para el bacp8, bacp10 y bacp12 respectivamente. En su estudio tambiÈn aplican el BACP a el caso real de su propia casa de estudios, la Universidad CatÛlica de ValparaÌso y Universidad de Playa Ancha.
+Este m√©todo resulto ser muy r√°pido para hallar las soluciones √≥ptimas, tardando  1.25, 1.92 y 6.37 segundos para el bacp8, bacp10 y bacp12 respectivamente. En su estudio tambi√©n aplican el BACP a el caso real de su propia casa de estudios, la Universidad Cat√≥lica de Valpara√≠so y Universidad de Playa Ancha.
 
 
-\subsection{ComparaciÛn de mÈtodos}
+\subsection{Comparaci√≥n de m√©todos}
 
-En la siguiente tabla se muestra una an·lisis comparativo entre el tiempo que tomo a cada mÈtodo encontrar una soluciÛn optima (o lo mas cercano)\footnote{Es necesario destacar que hay una diferencia de hasta 12 aÒos entre el primer mÈtodo y el mas reciente estudiado en este informe, por lo que parte de la mejora en el rendimiento puede deberse a la evoluciÛn del poder de computaciÛn en el tiempo.}.
+En la siguiente tabla se muestra una an√°lisis comparativo entre el tiempo que tomo a cada m√©todo encontrar una soluci√≥n optima (o lo mas cercano)\footnote{Es necesario destacar que hay una diferencia de hasta 12 a√±os entre el primer m√©todo y el mas reciente estudiado en este informe, por lo que parte de la mejora en el rendimiento puede deberse a la evoluci√≥n del poder de computaci√≥n en el tiempo.}.
 
 \begin{table}[H]
   \centering
@@ -275,7 +262,7 @@ En la siguiente tabla se muestra una an·lisis comparativo entre el tiempo que to
                             & bacp8       & bacp10                  & bacp12\\
     \midrule
     \multicolumn{1}{l}{\textsc{\footnotesize Castro y Manzano (2001)~\cite{DBLP:journals/corr/cs-PL-0110007}}} \\
-    lp\_solve & 1459.73 [s] & 1626.84 [s] \newline {\footnotesize(no Ûptimo)} & $\infty$\\
+    lp\_solve & 1459.73 [s] & 1626.84 [s] \newline {\footnotesize(no √≥ptimo)} & $\infty$\\
     \midrule
     \multicolumn{1}{l}{\textsc{\footnotesize Hinch et al. (2002)~\cite{Hnich02modellinga}}} \\
     $ILP$          &  3.45 [s]  & 4.23 [s]  & 131.30 [s] \\
@@ -296,38 +283,37 @@ En la siguiente tabla se muestra una an·lisis comparativo entre el tiempo que to
     Best Worst Ant System  & 1.25 [s]  & 1.25 [s] & 6.37 [s]\\
     \bottomrule
   \end{tabular}
-  \caption{ComparaciÛn de resultados entre todos los mÈtodos estudiados}
+  \caption{Comparaci√≥n de resultados entre todos los m√©todos estudiados}
 \end{table}
 
-Es claro entonces que los mejores resultados son los logrados por Di Gaspero y Schaerf~\cite{GbacpGaspero} utilizando mÈtodos de b˙squeda local hÌbridos. Muy de cerca est·n los resultados de Hinch et al. Pareciera entonces que los mÈtodos hÌbridos son el mÈtodo preferido para encontrar soluciones al BACP.
+Es claro entonces que los mejores resultados son los logrados por Di Gaspero y Schaerf~\cite{GbacpGaspero} utilizando m√©todos de b√∫squeda local h√≠bridos. Muy de cerca est√°n los resultados de Hinch et al. Pareciera entonces que los m√©todos h√≠bridos son el m√©todo preferido para encontrar soluciones al BACP. En las investigaciones mas recientes ~\cite{IOPORT.06373100} utilizan metaheuristicas de best worst and system, pero sus resultados no son los mas √≥ptimos a pesar de la ventaja tecnol√≥gica por ser la investigaci√≥n mas reciente.
 
 
 
 
 
+\section{Modelo Matem√°tico}
 
-\section{Modelo Matem·tico}
-
-% Uno o m·s modelos matem·ticos para el problema, idealmente indicando
-% el espacio de b˙squeda para cada uno. Cada modelo debe estar correctamente
-% referenciado, adem·s no debe ser una imagen extraÌda. TambiÈn deben
+% Uno o m√°s modelos matem√°ticos para el problema, idealmente indicando
+% el espacio de b√∫squeda para cada uno. Cada modelo debe estar correctamente
+% referenciado, adem√°s no debe ser una imagen extra√≠da. Tambi√©n deben
 % explicarse en detalle cada una de las partes, mostrando claramente
-% la funciÛn a maximizar/minimizar, variables y restricciones. Tanto
-% las fÛrmulas como las explicaciones deben ser consistentes.\textbf{
-% DeberÌa contener adem·s las correcciones solicitadas por el ayudante.}
-\subsection{RepresentaciÛn en matriz binaria}
-El primer modelo cl·sico es el presentado en~\cite{DBLP:journals/corr/cs-PL-0110007}, en su representaciÛn utiliza una matriz binaria para establecer $x_{ij}$ si un ramo $i$ pertenece a un periodo $j$. De esta manera se puede obtener la carga total de el periodo $k$-Èsimo como la suma de la columna $k$ de la matriz de pertenencia.
+% la funci√≥n a maximizar/minimizar, variables y restricciones. Tanto
+% las f√≥rmulas como las explicaciones deben ser consistentes.\textbf{
+% Deber√≠a contener adem√°s las correcciones solicitadas por el ayudante.}
+\subsection{Representaci√≥n en matriz binaria}
+El primer modelo cl√°sico es el presentado en~\cite{DBLP:journals/corr/cs-PL-0110007}, en su representaci√≥n utiliza una matriz binaria para establecer $x_{ij}$ si un ramo $i$ pertenece a un periodo $j$. De esta manera se puede obtener la carga total de el periodo $k$-√©simo como la suma de la columna $k$ de la matriz de pertenencia.
 
 \begin{description}
-  \item[Par·metros] \hfill
+  \item[Par√°metros] \hfill
     \begin{description}
-      \item[m:] n˙mero de ramos
-      \item[n:] n˙mero de periodos acadÈmicos
-      \item[$\alpha_i$:] n˙mero de crÈditos del ramo $i \qquad \forall i=1..m$
-      \item[$\beta$:] carga acadÈmica mÌnima permitida por periodo
-      \item[$\gamma$:] carga acadÈmica m·xima permitida por periodo
-      \item[$\delta$:] cantidad mÌnima de ramos por periodo
-      \item[$\epsilon$:] cantidad m·xima de ramos por periodo
+      \item[m:] n√∫mero de ramos
+      \item[n:] n√∫mero de periodos acad√©micos
+      \item[$\alpha_i$:] n√∫mero de cr√©ditos del ramo $i \qquad \forall i=1..m$
+      \item[$\beta$:] carga acad√©mica m√≠nima permitida por periodo
+      \item[$\gamma$:] carga acad√©mica m√°xima permitida por periodo
+      \item[$\delta$:] cantidad m√≠nima de ramos por periodo
+      \item[$\epsilon$:] cantidad m√°xima de ramos por periodo
     \end{description}
 
     \item[Variables] \hfill
@@ -335,112 +321,114 @@ El primer modelo cl·sico es el presentado en~\cite{DBLP:journals/corr/cs-PL-0110
         &x_{ij} = \begin{cases} 1 \quad \text{si ramo $i$ es asignado al periodo $j$} \\ 0 \quad \text{en otro caso} \end{cases}
         \qquad \forall i=1..m, \forall j=1..n
       \end{align*}
-    \item[FunciÛn Objetivo] \hfill
-      \begin{align*}
-        &\text{Min} \; c = \text{Max}\{c_1, \ldots ,c_n\}
-      \end{align*}
     \item[Restricciones] \hfill
       \begin{align*}
-          \intertext{Carga acadÈmica del periodo $j$}
+          \intertext{\textbf{Carga acad√©mica del periodo $j$}: se obtiene sumando los cr√©ditos ($\alpha_i$) de todos los ramos del periodo actual ($x_{ij}$ al ser variable binaria es la que permite sumar o no seg√∫n la pertenencia de ramos en los periodos)}
           c_j = \sum_{i=1}^{m}\alpha_ix_{ij} \qquad \forall \; j=1 \ldots n
-          \intertext{Todos los ramos $i$ deben ser asignados a alg˙n periodo $j$}
+          \intertext{\textbf{Todos los ramos $i$ deben ser asignados a alg√∫n periodo $j$}: Se obtiene sumando la variable binaria para el ramo $i$, la cual indica si el ramo $i$ esta en el periodo $j$, los ramos correctamente asignados solo pueden pertenecer a 1 periodo, por lo que la suma de $x_{ij}$ para cada ramo $i$ debe ser 1.}
           \sum_{j=1}^{n}x_{ij} = 1 \qquad \forall \; i = 1\ldots m
-          \intertext{El ramo $b$ tiene como prerequisito al $a$}
+          \intertext{\textbf{El ramo $b$ tiene como prerequisito al $a$}: El periodo donde esta asignado el ramo $a$ debe ser inferior al del periodo del ramo $b$, por lo que se suman todas las $x_{ar}$ hasta el periodo anterior al periodo de $b$ y se iguala a 1 forzando a que el ramo $a$ este en alg√∫n periodo entre 1 y $j-1$ cuando el ramo $b$ esta en el $j$.}
           x_{bj} \leq \sum_{r=1}^{j-1}x_{ar}=1 \qquad \forall \; j=2 \ldots n
-          \intertext{La carga acadÈmica m·xima esta definida como}
+          \intertext{\textbf{La carga acad√©mica m√°xima esta definida como}}
           c = \text{Max}\;\{c_1,\ldots,c_n\}\\
           c_j \leq c \qquad \forall \; j=1\ldots n
-          \intertext{La carga acadÈmica de un periodo no debe pasar los lÌmites}
+          \intertext{\textbf{La carga acad√©mica de un periodo no debe pasar los l√≠mites}}
           \beta \leq c_j \leq \gamma \qquad \forall \; j=i\ldots n
-          \intertext{La cantidad de ramos de un periodo no debe pasar los lÌmites}
+          \intertext{\textbf{La cantidad de ramos de un periodo no debe pasar los l√≠mites}}
           \delta \leq \sum_{i=1}^{m}x_{ij} \leq \epsilon \qquad \forall \; j = 1 \ldots n
+      \end{align*}
+      \item[Funci√≥n Objetivo] \hfill
+
+      $c$ es el m√°ximo de las cargas de todos los periodos. La funci√≥n objetivo minimiza dicha carga m√°xima.
+      \begin{align*}
+        &\text{Min} \; c
       \end{align*}
 \end{description}
 
-El espacio de b˙squeda para este modelo es una matriz, en que cada elemento $(i,j)$ puede tomar dos valores posibles. Si el tamaÒo de la matriz es de $m \times n$ entonces el espacio de b˙squeda es de: $2^{m\times n}$. Para los casos particulares de bacp8, bacp10 y bacp12 se tienen los siguientes espacios de b˙squeda:
+El espacio de b√∫squeda para este modelo es una matriz, en que cada elemento $(i,j)$ puede tomar dos valores posibles. Si el tama√±o de la matriz es de $m \times n$ entonces el espacio de b√∫squeda es de: $2^{m\times n}$. Para los casos particulares de bacp8, bacp10 y bacp12 se tienen los siguientes espacios de b√∫squeda:
 
 \begin{table}[H]
   \centering
   \begin{tabular}{@{}lllc@{}}
     \toprule[1pt]
-    Instancia & n & m & Espacio de b˙squeda\\
+    Instancia & n & m & Espacio de b√∫squeda\\
     \midrule
     bacp8 & 8 & 46 & $2^{368}$ \\
     bacp10 & 10 & 42 & $2^{420}$ \\
     bacp12 & 12 & 66 & $2^{792}$ \\
     \bottomrule
   \end{tabular}
-  \caption{Espacio de b˙squeda para el modelo cl·sico}
+  \caption{Espacio de b√∫squeda para el modelo cl√°sico}
 \end{table}
 
-\subsection{RepresentaciÛn en un arreglo}
+\subsection{Representaci√≥n en un arreglo} \label{sec:reparreglo}
 
-Esta representaciÛn disminuye considerablemente el espacio de b˙squeda, ya que utiliza solo un arreglo unidimensional para la asignaciÛn de ramos a los periodos. Si bien reduce el espacio de b˙squeda, la restricciÛn de la carga acadÈmica del periodo $j$ es mas difÌcil de calcular~\cite{Hnich02modellinga}. El modelo es el siguiente:
+Esta representaci√≥n disminuye considerablemente el espacio de b√∫squeda, ya que utiliza solo un arreglo unidimensional para la asignaci√≥n de ramos a los periodos. Si bien reduce el espacio de b√∫squeda, la restricci√≥n de la carga acad√©mica del periodo $j$ es mas dif√≠cil de calcular~\cite{Hnich02modellinga}. El modelo es el siguiente:
 
 \begin{description}
-  \item[Par·metros] \hfill
+  \item[Par√°metros] \hfill
     \begin{description}
-      \item[m:] n˙mero de ramos
-      \item[n:] n˙mero de periodos acadÈmicos
-      \item[$\alpha_i$:] n˙mero de crÈditos del ramo $i \qquad \forall i=1..m$
-      \item[$\beta$:] carga acadÈmica mÌnima permitida por periodo
-      \item[$\gamma$:] carga acadÈmica m·xima permitida por periodo
-      \item[$\delta$:] cantidad mÌnima de ramos por periodo
-      \item[$\epsilon$:] cantidad m·xima de ramos por periodo
+      \item[m:] n√∫mero de ramos
+      \item[n:] n√∫mero de periodos acad√©micos
+      \item[$\alpha_i$:] n√∫mero de cr√©ditos del ramo $i \qquad \forall i=1..m$
+      \item[$\beta$:] carga acad√©mica m√≠nima permitida por periodo
+      \item[$\gamma$:] carga acad√©mica m√°xima permitida por periodo
+      \item[$\delta$:] cantidad m√≠nima de ramos por periodo
+      \item[$\epsilon$:] cantidad m√°xima de ramos por periodo
     \end{description}
 
     \item[Variables] \hfill
       \begin{description}
         \item[$x_i$:] periodo del ramo $i \qquad \forall \; i=1\ldots m, x_i \in \{1 \ldots n\}$
       \end{description}
-    \item[FunciÛn Objetivo] \hfill
-      \begin{align*}
-        &\text{Min} \; c = \text{Max}\{c_1, \ldots ,c_n\}
-      \end{align*}
     \item[Restricciones] \hfill
       \begin{align*}
-          \intertext{Carga acadÈmica del periodo $j$}
+          \intertext{\textbf{Carga acad√©mica del periodo $j$}: La carga del periodo $j$ es la suma de los cr√©ditos de todos los ramos que est√°n presentes en dicho periodo, por lo que se suman todos los $\alpha_i$ siempre que $x_i$ est√© en el periodo $j$-√©simo.}
           c_j &= \sum_{i=1}^{m}\alpha_i \mid x_i=j \qquad \forall \; j=1 \ldots n
-          \intertext{El ramo $b$ tiene como prerequisito al $a$}
+          \intertext{\textbf{El ramo $b$ tiene como prerequisito al $a$}}
           x_a &< x_b
-          \intertext{La carga acadÈmica m·xima esta definida como}
+          \intertext{\textbf{La carga acad√©mica m√°xima esta definida como}}
           c &= \text{Max}\;\{c_1,\ldots,c_n\}\\
           c_j &\leq c \qquad \forall \; j=1\ldots n
-          \intertext{La carga acadÈmica de un periodo no debe pasar los lÌmites}
+          \intertext{\textbf{La carga acad√©mica de un periodo no debe pasar los l√≠mites}}
           \beta &\leq c_j \leq \gamma \qquad \forall \; j=i\ldots n
-          \intertext{La cantidad de ramos de un periodo no debe pasar los lÌmites}
+          \intertext{\textbf{La cantidad de ramos de un periodo no debe pasar los l√≠mites}}
           \delta &\leq \sum_{i=1}^{m} 1 \mid x_i=j \leq \epsilon \qquad \forall \; j = 1 \ldots n
+      \end{align*}
+    \item[Funci√≥n Objetivo] \hfill
+      \begin{align*}
+        &\text{Min} \; c
       \end{align*}
 \end{description}
 
-La ˙nica diferencia es la variable que se utiliza, esto modifica el espacio de b˙squeda. existir·n $m$ variables, cada una podr· tomar $n$ valores, por lo que el espacio de b˙squeda es de $n^m$
+La √∫nica diferencia es la variable que se utiliza, esto modifica el espacio de b√∫squeda. existir√°n $m$ variables, cada una podr√° tomar $n$ valores, por lo que el espacio de b√∫squeda es de $n^m$
 
 \begin{table}[H]
   \centering
   \begin{tabular}{@{}lllc@{}}
     \toprule[1pt]
-    Instancia & n & m & Espacio de b˙squeda\\
+    Instancia & n & m & Espacio de b√∫squeda\\
     \midrule
     bacp8 & 8 & 46 & $8^{46}$ \\
     bacp10 & 10 & 42 & $10^{42}$ \\
     bacp12 & 12 & 66 & $12^{66}$ \\
     \bottomrule
   \end{tabular}
-  \caption{Espacio de b˙squeda para el modelo de un arreglo 2d}
+  \caption{Espacio de b√∫squeda para el modelo de un arreglo 2d}
 \end{table}
 
-En todos los casos, el espacio de b˙squeda es menor que en el modelo cl·sico.
+En todos los casos, el espacio de b√∫squeda es menor que en el modelo cl√°sico.
 
 \subsection{Minimizar distancias}
 
-Este modelo cambia la funciÛn objetivo, en este caso se minimiza la suma de las distancias medias entre la carga del periodo y la carga promedio total~\cite{Monette07acp}. En este modelo deciden eliminar las restricciones de n˙mero de ramos m·ximo y mÌnimo por periodo, asÌ como tambiÈn la carga m·xima y mÌnima por periodo argumentando que la naturaleza de las soluciones balanceadas de los problemas (bacp8, bacp10 y bacp12) siempre cumplen con dichas restricciones.
+Este modelo cambia la funci√≥n objetivo, en este caso se minimiza la suma de las distancias medias entre la carga del periodo y la carga promedio total~\cite{Monette07acp}. En este modelo deciden eliminar las restricciones de n√∫mero de ramos m√°ximo y m√≠nimo por periodo, as√≠ como tambi√©n la carga m√°xima y m√≠nima por periodo argumentando que la naturaleza de las soluciones balanceadas de los problemas (bacp8, bacp10 y bacp12) siempre cumplen con dichas restricciones.
 
 \begin{description}
-  \item[Par·metros] \hfill
+  \item[Par√°metros] \hfill
     \begin{description}
-      \item[m:] n˙mero de ramos
-      \item[n:] n˙mero de periodos acadÈmicos
-      \item[$\alpha_i$:] n˙mero de crÈditos del ramo $i \qquad \forall i=1..m$
+      \item[m:] n√∫mero de ramos
+      \item[n:] n√∫mero de periodos acad√©micos
+      \item[$\alpha_i$:] n√∫mero de cr√©ditos del ramo $i \qquad \forall i=1..m$
       \item[$w$:] carga total $w = \sum_{i=1}^{m}\alpha_i$
     \end{description}
 
@@ -448,81 +436,412 @@ Este modelo cambia la funciÛn objetivo, en este caso se minimiza la suma de las 
       \begin{description}
         \item[$x_i$:] periodo del ramo $i \qquad \forall \; i=1\ldots m, x_i \in \{1 \ldots n\}$
       \end{description}
-    \item[FunciÛn Objetivo] \hfill
-      \begin{align*}
-        &\text{Min} \; c(p) = \sum_{i=1}^{m} |m \,\alpha_i - w|^p \qquad p > 0
-      \end{align*}
+
     \item[Restricciones] \hfill
       \begin{align*}
-          \intertext{Carga acadÈmica del periodo $j$}
+          \intertext{Carga acad√©mica del periodo $j$}
           c_j &= \sum_{i=1}^{m}\alpha_i \mid x_i=j \qquad \forall \; j=1 \ldots n
           \intertext{El ramo $b$ tiene como prerequisito al $a$}
           x_a &< x_b
       \end{align*}
+    \item[Funci√≥n Objetivo] \hfill
+
+      Se busca minimizar la carga dada una funci√≥n de distancia media, la expresionismo $|m\alpha_i - w|^p$ calcula la distancia de los cr√©ditos del ramo actual ($alpha_i$) y los cr√©ditos promedios ($w$). La funci√≥n de distancia media se minimiza para encontrar la menor distancia posible entre todos los ramos y el promedio de los ramos.
+      \begin{align*}
+        &\text{Min} \; c(p) = \sum_{i=1}^{m} |m \,\alpha_i - w|^p \qquad p > 0
+      \end{align*}
 \end{description}
 
-En este modelo, se busca minimizar una funciÛn de distancia media, esta distancia viene dada por la expresiÛn $|m \,\alpha_i - w|^p$ que depende de $p$ y representa la distancia de la carga de el periodo $i$ con la carga promedio. En el modelo no existe una preferencia a alg˙n $p$~\cite{Monette07acp}. En sus estudios comparan para los casos de $p=1$, $p=2$ y $p=\infty$ pero no encuentran una relaciÛn directa entre $p$ y los resultados obtenidos.
+En este modelo, se busca minimizar una funci√≥n de distancia media, esta distancia viene dada por la expresi√≥n $|m \,\alpha_i - w|^p$ que depende de $p$ y representa la distancia de la carga de el periodo $i$ con la carga promedio. En el modelo no existe una preferencia a alg√∫n $p$~\cite{Monette07acp}. En sus estudios comparan para los casos de $p=1$, $p=2$ y $p=\infty$ pero no encuentran una relaci√≥n directa entre $p$ y los resultados obtenidos.
 
-El espacio de b˙squeda es el mismo que en el modelo anterior. En la investigaciÛn~\cite{Monette07acp} muestran ambas representaciones de variables pero no hacen menciÛn al espacio de b˙squeda.
-
-
-\section{RepresentaciÛn}
-
-RepresentaciÛn matem·tica y estructura de datos que se usa (arreglos,
-matrices, etc.), por quÈ se usa, la relaciÛn entre la representaciÛn
-matem·tica y la estructura. \textbf{Utilizar figuras, tablas, etc.
-en lo posible, de modo que sea f·cil entender las estructuras utilizadas,
-adem·s describa lo m·s sencillo y claro que pueda.}
+El espacio de b√∫squeda es el mismo que en el modelo anterior. En la investigaci√≥n~\cite{Monette07acp} muestran ambas representaciones de variables pero no hacen menci√≥n al espacio de b√∫squeda.
 
 
-\section{DescripciÛn del algoritmo}
+\section{Representaci√≥n}
 
-CÛmo fue implementando, interesa la implementaciÛn m·s que el algoritmo
-genÈrico, es decir, si se tiene que implementar SA, lo que se espera
-es que se explique en pseudo cÛdigo la estructura general y en p·rrafo
-explicativo cada parte cÛmo fue implementada para su caso particular,
-si se utilizan operadores se debe explicar por quÈ se utilizÛ ese
-operador, si fuera el caso de una tÈcnica completa, si se utiliza
-recursiÛn o no, etc. \textbf{Recuerde utilizar pseudocÛdigo para mostrar
-cada algoritmo y separar la explicaciÛn de su algoritmo en secciones
-para que se logre un mejor entendimiento. Adem·s, en este punto no
-se espera que se incluya cÛdigo, eso va aparte.}
+% Representaci√≥n matem√°tica y estructura de datos que se usa (arreglos,
+% matrices, etc.), por qu√© se usa, la relaci√≥n entre la representaci√≥n
+% matem√°tica y la estructura. \textbf{Utilizar figuras, tablas, etc.
+% en lo posible, de modo que sea f√°cil entender las estructuras utilizadas,
+% adem√°s describa lo m√°s sencillo y claro que pueda.}
+La representaci√≥n matem√°tica que se utiliza es la propuesta en la secci√≥n \ref{sec:reparreglo}, pues es mas sencilla la implementaci√≥n utilizando un arreglo din√°mico, adem√°s se reduce considerablemente el espacio de b√∫squeda.
 
+Se utiliza una estructura de datos llamada \texttt{bacp\_instance} que contiene la definici√≥n completa de la instancia del problema, contiene el n√∫mero de cursos y periodos,  cargas m√°ximas y m√≠nimas, n√∫mero m√°ximo y m√≠nimo de cursos por periodos, un arreglo con los cr√©ditos de cada ramo, el n√∫mero de preerquisitos, un arreglo \texttt{x[i]} el cual indica el periodo del ramo i-√©simo. Como extra se agrega un arreglo de prerequisitos de ramos; para esto se defini√≥ una estructura llamada \texttt{prereq} que contiene un entero $a$ como prerequisito de un $b$.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lllc@{}}
+    \toprule[1pt]
+    Representaci√≥n matem√°tica & Representaci√≥n en \texttt{bacp\_instance}\\
+    \midrule
+    m & \texttt{n\_courses}\\
+    n & \texttt{n\_periods}\\
+    $\alpha_i$ & \texttt{credits[]}\\
+    $\beta$ & \texttt{min\_load}\\
+    $\gamma$ & \texttt{max\_load}\\
+    $\delta$ & \texttt{min\_courses}\\
+    $\epsilon$ & \texttt{max\_courses}\\
+    $x_i$ & \texttt{period[]}\\
+    \bottomrule
+  \end{tabular}
+  \caption{Representaci√≥n del problema}
+\end{table}
+
+
+\section{Descripci√≥n del algoritmo}
+
+% C√≥mo fue implementando, interesa la implementaci√≥n m√°s que el algoritmo
+% gen√©rico, es decir, si se tiene que implementar SA, lo que se espera
+% es que se explique en pseudo c√≥digo la estructura general y en p√°rrafo
+% explicativo cada parte c√≥mo fue implementada para su caso particular,
+% si se utilizan operadores se debe explicar por qu√© se utiliz√≥ ese
+% operador, si fuera el caso de una t√©cnica completa, si se utiliza
+% recursi√≥n o no, etc. \textbf{Recuerde utilizar pseudoc√≥digo para mostrar
+% cada algoritmo y separar la explicaci√≥n de su algoritmo en secciones
+% para que se logre un mejor entendimiento. Adem√°s, en este punto no
+% se espera que se incluya c√≥digo, eso va aparte.}
+
+\subsection{Heur√≠stica Greedy para una soluci√≥n inicial}
+
+Una soluci√≥n inicial balanceada es mejor que una soluci√≥n inicial muy mala. SA utiliza una solucion inicial al azar, pero esta puede ser reemplazada por una solucion inicial construida de manera inteligente utilizando un algoritmo greedy.
+
+Para este caso se utiliza el siguiente algoritmo
+
+\begin{algorithm}[H]
+\caption{Heuristica Greedy para inicializar Simulated Annealing de BACP}
+\label{GreedyHeuristic}
+\begin{algorithmic}[1]
+\Procedure{Greedy\textendash Initialization} {}
+    \State \texttt{solution} $=[]$ Solucion inicial
+    \State \texttt{optimal\_load} = $\frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{creditos[i]}$ \quad Carga optima
+    \State $i = 0$ Periodo inicial
+    \For{ramo in ramos}
+      \If{ramos periodo $i$ $>$ \texttt{max\_ramos} OR cr√©ditos periodo $i$ + creditos(ramo) $>$ \texttt{optimal\_load}}
+
+        \State $i = (i + 1) \% n\_periods $
+      \EndIf
+
+      \State \texttt{solution[ramo] = i}
+      \State \textbf{ArreglarColisionesPrereq()}
+    \EndFor
+    \State \Return solution
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+La idea general es obtener un optimo te√≥rico utilizando la formula:
+
+\begin{align*}
+  \frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{creditos[i]}
+\end{align*}
+
+es el promedio de cr√©ditos en los periodos, se obtiene sumando el total de cr√©ditos de la malla curricular y dividiendolo por el n√∫mero de periodos.
+
+Conociendo el optimo te√≥rico, se comienza una soluci√≥n inicial vac√≠a (linea 5). Luego se itera sobre cada ramo intentando asignarlo al periodo $i$-√©simo (lineas 6-8). El periodo $i$ se mueve al siguiente periodo si el n√∫mero de ramos del periodo $i$ es mayor al m√°ximo de ramos por periodo permitido (restricci√≥n) o si el n√∫mero de cr√©ditos del periodo $i$ mas los cr√©ditos del nuevo ramo exceden el optimo (linea 6), si esto sucede se mueve $i$ al siguiente periodo disponible, como seguridad se modula el resultado al n√∫mero total de periodos, por si el algoritmo greedy llega a pasarse del n√∫mero de periodos que existen, para que siga asignando en el periodo 0 (linea 7).
+
+Una vez calculado el periodo $i$-√©simo se asigna el \texttt{ramo} al periodo $j$ (linea 9).
+
+El procedimiento \textbf{ArreglarColisionesPrereq()} (linea 10) busca en el periodo actual posibles colisiones por prerequisitos, si el ramo $a$ es prerequisito del ramo $b$ y ambos quedan asignados en el periodo $i$, entonces se reasigna el ramo $b$ al siguiente periodo.
+
+El algoritmo greedy si bien no entrega el optimo, si logra asignar los ramos inicialmente cumpliendo por lo menos con las restricciones de n√∫mero m√°ximo y m√≠nimo de cr√©ditos y ramos por periodo por lo que SA es guiado a una zona de soluciones mas balanceadas.
+
+\subsection{Algoritmo Simulated Annealing para el BACP}
+
+El procedimiento Simulated annealing realiza m√∫ltiples b√∫squedas locales en diferentes espacios del conjunto de soluciones, a medida que el algoritmo progresa su criterio para aceptar soluciones peores disminuye, i.e. se vuelve mas estricto con el paso del tiempo.
+
+Existen dos iteraciones principales, la iteraci√≥n por temperatura y la iteraci√≥n por b√∫squeda local. La iteraci√≥n por temperatura permite explorar en diferentes lugares del espacio de b√∫squeda, mientras que la iteraci√≥n por b√∫squeda local permite explotar soluciones locales. En un principio SA permite aceptar soluciones peores en la b√∫squeda local siempre que se cumpla una regla de aceptaci√≥n a partir de la temperatura actual, a medida que la temperatura disminuye el criterio de aceptaci√≥n se vuelve mas estricto.
+
+\begin{algorithm}[H]
+\caption{Simulated Annealing for BACP}
+\label{SimulatedAnnealingAlgo}
+\begin{algorithmic}[1]
+\Procedure{Simulated\textendash Annealing} {}
+     \State \texttt{s\_current} = soluci√≥n inicial con heur√≠stica Greedy
+     \State \texttt{s\_best} = \texttt{s\_current} Mejor soluci√≥n
+     \State \texttt{t\_current} = Temperatura inicial
+     \State \texttt{t\_min} = Temperatura final
+     \While{t\_current $>$ t\_min}
+        \For{\texttt{iter} veces}
+          \State \texttt{vecino} = generar\_vecino(\texttt{s\_current});
+          \State \texttt{old\_cost} = costo(\texttt{s\_current})
+          \State \texttt{new\_cost} = costo(\texttt{vecino})
+
+          \If{old\_cost $>$ new\_cost OR $e^{-|\frac{\text{new\_cost} - \text{old\_cost}}{\text{t\_current}}|} > rand()$}
+            \State \texttt{s\_current} = \texttt{vecino}
+          \EndIf
+
+          \If{cost(s\_best) $>$ new\_cost}
+            \State \texttt{s\_best} = \texttt{vecino}
+          \EndIf
+        \EndFor
+        \State \texttt{t\_current} = $\text{\texttt{t\_current}}\times \alpha$
+     \EndWhile
+     \State \Return \texttt{s\_best}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+En la linea 6 se comienza la iteraci√≥n por temperatura, mientras la temperatura actual sea mayor a la temperatura m√≠nima se repite el proceso. La temperatura actual disminuye en cada iteraci√≥n seg√∫n una tasa de cambio dada por $\alpha$ en la linea 18.
+
+La iteraci√≥n de b√∫squeda local sucede entre las lineas 7 a la 17. Para la b√∫squeda local se genera una soluci√≥n vecina cambiando aleatoreamente un curso de periodo (linea 8), si el costo de esta nueva soluci√≥n es menor al costo de la soluci√≥n anterior o si aleatoreamente se decide aceptar una soluci√≥n peor (linea 11), entonces la soluci√≥n actual pasa a ser la nueva soluci√≥n vecina (linea 12).
+
+Por √∫ltimo se mantiene registro de cual ha sido la mejor de todas las soluciones encontradas. Si se encuentra una mejor entonces se actualiza (lineas 14-16).
 
 \section{Experimentos}
 
-Se necesita saber cÛmo experimentaron, cÛmo definieron par·metros,
-cÛmo se fueron modificando, cu·les problemas se trataron, cu·les fueron
-las instancias utilizadas, cu·les fueron las caracterÌsticas de las
-instancias, cu·les fueron los criterios de tÈrmino del algoritmo.
-\textbf{En el caso de las tÈcnicas incompletas, es importante que
-ejecute su programa varias veces con distintas semillas aleatorias,
-para obtener valores estadÌsticos de los resultados}.
+% Se necesita saber c√≥mo experimentaron, c√≥mo definieron par√°metros,
+% c√≥mo se fueron modificando, cu√°les problemas se trataron, cu√°les fueron
+% las instancias utilizadas, cu√°les fueron las caracter√≠sticas de las
+% instancias, cu√°les fueron los criterios de t√©rmino del algoritmo.
+% \textbf{En el caso de las t√©cnicas incompletas, es importante que
+% ejecute su programa varias veces con distintas semillas aleatorias,
+% para obtener valores estad√≠sticos de los resultados}.
 
+Los par√°metros del algoritmo son:
+
+\begin{description}
+  \item[alpha ($\alpha$):] Tasa de reducci√≥n de la temperatura
+  \item[iter:] N√∫mero de iteraciones locales a realizar en cada temperatura.
+  \item[t-init:] Temperatura inicial
+  \item[t-min:] Temperatura final
+\end{description}
+
+Por lo que se realizaron 4 experimentos, dejando 3 par√°metros constantes y variando el par√°metro restante entre un rango de valores razonables. Para ayudar en este proceso repetitivo, se escribi√≥ un script en python capaz de ejecutar m√∫ltiples veces una instancia variando el par√°metro a elecci√≥n, luego los resultados son graficados mostrando el valor de cr√©ditos/costos encontrado y su exactitud en comparaci√≥n al optimo, para cada valor del par√°metro en estudio.
+
+Todos los experimentos fueron probados usando los cl√°sicos bacp8, bacp10 y bacp12.
+
+\subsection{Experimento 1: $\alpha$}
+
+$\alpha$ es la tasa de cambio de temperatura, esta debe ser un n√∫mero entre 0 y 1 que asegure que la temperatura disminuya. Mientras mas cercano a 1 mas lenta la tasa de enfriamiento, mientras mas cercana a 0 es mas r√°pida. En este caso se varia $\alpha$ entre 0.85 y 0.99 en cambios de 0.005. Esto genera 29 valores de $\alpha$ para probar. En cada valor de $\alpha$ se realizan 25 repeticiones del problema para tener una muestra mas dispersa.
+
+Los par√°metros fueron los siguientes:
+
+\begin{description}
+  \item[alpha ($\alpha$):] variable [0.85-0.99] en pasos de 0.005
+  \item[iter:] 100
+  \item[t-init:] 1.0
+  \item[t-min:] 0.00001
+\end{description}
+
+\subsection{Experimento 2: Iteraciones locales}
+
+El n√∫mero de iteraciones hace referencia a cuantas b√∫squedas locales realiza el algoritmo en cada temperatura.
+Mientras mas repeticiones realiza este proceso, mas permite moverse entre vecinos. Este proceso tiene una dependencia directa de la temperatura actual, la cual indica si debe aceptar o no una soluci√≥n peor, en pos de encontrar una posible soluci√≥n mejor. El numero de iteraciones se hizo variar entre 100 y 600 en pasos de 25, esto genera 21 repeticiones del problema, con 25 repeticiones por cada valor de las iteraciones.
+
+Para este experimento se utilizan los siguientes par√°metros
+\begin{description}
+  \item[alpha ($\alpha$):] 0.90
+  \item[iter:] variable entre 100 y 600 en pasos de 25
+  \item[t-init:] 1.0
+  \item[t-min:] 0.00001
+\end{description}
+
+\subsection{Experimento 3: Temperatura}
+
+
+En el caso de la temperatura se tienen dos par√°metros que se pueden controlar, pero por la  formula que se utiliza para determinar si se acepta una peor soluci√≥n, la temperatura inicial conviene dejarla fija en 1 y simplemente variar la temperatura m√≠nima para controlar las repeticiones. En este caso se prueban los siguientes valores de \texttt{t\_min}: 0.001, 0.0001, 0.00001, 0.000001 y 0.0000001
+
+\begin{description}
+  \item[alpha ($\alpha$):] 0.90
+  \item[iter:] 250
+  \item[t-init:] 1.0
+  \item[t-min:] variable entre $10^{-3}, 10^{-4}, 10^{-5}, 10^{-6}, 10^{-7}$
+\end{description}
 
 \section{Resultados}
 
-Que fue lo que se logrÛ con la experimentaciÛn, incluir tablas y par·metros,
-gr·ficos, etc. lo m·s explicativo posible. Adem·s destacar puntos
-importantes del problema, caracterÌsticas de las instancias que influyeron
-en los resultados, valores de par·metros que influyeron en los resultados,
-an·lisis de calidad de las soluciones encontradas a travÈs del tiempo,
-an·lisis en profundidad de la tÈcnica vs los resultados obtenidos,
-valores promedio, desviaciones, \textbf{comparaciones con resultados
-de la literatura}, etc. TambiÈn deberÌa discutir quÈ cosas podrÌa
-haber agregado o quedan como desafÌos para trabajo futuro en su algoritmo.
+% Que fue lo que se logr√≥ con la experimentaci√≥n, incluir tablas y par√°metros,
+% gr√°ficos, etc. lo m√°s explicativo posible. Adem√°s destacar puntos
+% importantes del problema, caracter√≠sticas de las instancias que influyeron
+% en los resultados, valores de par√°metros que influyeron en los resultados,
+% an√°lisis de calidad de las soluciones encontradas a trav√©s del tiempo,
+% an√°lisis en profundidad de la t√©cnica vs los resultados obtenidos,
+% valores promedio, desviaciones, \textbf{comparaciones con resultados
+% de la literatura}, etc. Tambi√©n deber√≠a discutir qu√© cosas podr√≠a
+% haber agregado o quedan como desaf√≠os para trabajo futuro en su algoritmo.
+
+El script en python arroja un grafico que muestra cr√©ditos/costo (en rojo) vs el parametro de estudio y exactitud (en verde) vs el parametro de estudio.
+
+\subsection{Experimento 1: $\alpha$}
+
+Los resultados obtenidos tras 2175 ejecuciones, 725 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro $\alpha$ y dejando todo lo dem√°s constante como:
+\begin{description}
+    \item[iter:] 100
+    \item[t-init:] 1.0
+    \item[t-min:] 0.00001
+\end{description}
+Se obtuvieron los siguientes resultados
+
+\begin{figure}[H]
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/1-alpha-bacp8.png}
+        \caption{Variaci√≥n de $\alpha$ en bacp8}
+        \label{fig:alpha1}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/1-alpha-bacp10.png}
+        \caption{Variaci√≥n de $\alpha$ en bacp10}
+        \label{fig:alpha2}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}%
+    \includegraphics[width=\linewidth]{img/1-alpha-bacp12.png}
+        \caption{Variaci√≥n de $\alpha$ en bacp12}
+        \label{fig:alpha3}
+    \endminipage
+\end{figure}
+
+Con los siguientes valores promedios:
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule[1pt]
+    Instancia & Tiempo & Carga & Accuracy Promedio & Accuracy Final \\
+    \midrule
+     bacp8 & 0.3705 [s] & 17.0262 [cr√©dito] & 97.3793\% & 99.8461\% \\
+    bacp10 & 0.3398 [s] & 14.1476 [cr√©dito] & 85.2414\% & 98.9567\% \\
+    bacp12 & 0.7599 [s] & 18.0400 [cr√©dito] & 96.0000\% & 99.7782\% \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 variando $\alpha$}
+\end{table}
+
+Observando los tres graficos se aprecia que mientras mayor es $\alpha$, mayor cantidad de interaciones de temperatura SA debe realizar, por lo que se nota la tendencia a obtener una exactitud del 100\% cerca de un $\alpha = 0.93$ en adelante. Los √∫nicos puntos anormales son el 0.85, 0.875, 0.92 los cuales presentaron un promedio de 17.25 cr√©ditos en las 25 repeticiones de la instancia en cada punto.
+
+En este caso del bacp10 se comporto de manera mas err√°tica, pero con una clara tendencia a llegar a los 14 cr√©ditos a medida que $\alpha$ aumenta. Nuevamente se observa que los puntos 0.85, 0.875 y 0.92 tienen un peor rendimiento en encontrar el √≥ptimo.
+
+Para el bacp12 el comportamiento fue similar al bacp8, un poco mas violento hasta antes del 0.95 pero la tendencia a estabilizarse es la misma y termina con una exactitud cercana 100\%.
+
+Con respecto a los tiempos promedios, tanto el bacp8 como el bacp10 les tomo solo 0.35 [s] en encontrar soluciones, mientras que el bacp12 fue de cerca del 0.7 [s], aproximadamente el doble de tiempo. Sin embargo la peor exactitud fue la entregada por bacp10, con un 85\% promedio, mientras que bacp8 y bacp12 est√°n ambas por sobre el 95\% de exactitud promedio. De todas formas las exactitudes totales de todas las instancias fueron superiores al 98\%.
+
+\subsection{Experimento 2: Iteraciones locales}
+
+Los resultados obtenidos tras 825 ejecuciones, 275 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro \texttt{iter} y dejando todo lo dem√°s constante como:
+
+\begin{description}
+    \item[$\alpha$:] 0.90
+    \item[t-init:] 1.0
+    \item[t-min:] 0.00001
+\end{description}
+Se obtuvieron los siguientes resultados
+
+\begin{figure}[H]
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/2-iter-bacp8.png}
+        \caption{Variaci√≥n de iteraciones locales en bacp8}
+        \label{fig:iter1}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/2-iter-bacp10.png}
+        \caption{Variaci√≥n de iteraciones locales en bacp10}
+        \label{fig:iter2}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}%
+    \includegraphics[width=\linewidth]{img/2-iter-bacp12.png}
+        \caption{Variaci√≥n de iteraciones locales en bacp12}
+        \label{fig:iter3}
+    \endminipage
+\end{figure}
+
+Con los siguientes valores promedios:
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule[1pt]
+    Instancia & Tiempo & Carga & Accuracy Promedio & Accuracy Final \\
+    \midrule
+     bacp8 &  0.6107 [s] & 17.0109 [cr√©dito] &  98.9090\% & 99.9359\% \\
+    bacp10 &  0.5700 [s] & 14.0691 [cr√©dito] &  93.0910\% & 99.5089\% \\
+    bacp12 & 1.25711 [s] & 18.0073 [cr√©dito] &  99.2730\% & 99.9595\% \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 variando \texttt{iter}}
+\end{table}
+
+Lo primero que se observa en este experimento es que los valores se llega r√°pidamente a soluciones optimas a medida que la cantidad de iteraciones locales aumenta. Incluso en la instancia bacp10, la cual en el experimento anterior resulto ser la mas err√°tica, en este caso solo tiene los valores 100, 200 y 250 incorrectos, ya a partir de las 300 iteraciones logra llegar casi siempre al optimo.
+
+Por otro lado las instancias bacp8 y bacp12 tienen un comportamiento muy similar, con tan solo 150 iteraciones en adelante se obtienen resultados √≥ptimos. La diferencia entre ambos se produce en el tiempo de ejecuci√≥n, bacp12 le toma el doble de tiempo que a bacp8. Resalta la exactitud promedio de un 99\% en ambos casos, y de casi el 100\% en la exactitud total.
+
+bacp10 es el √∫nico que tuvo menor exactitud promedio de 93.091\%, pero aun as√≠ fue mejor que en el experimento 1 donde solo obtuvo un 85.2414\%.
+
+Cabe resaltar que en este experimento se esta utilizando el mejor valor encontrado para $\alpha$ en el experimento 1. Lo suficientemente bueno como para entregar resultados significativos, pero que a su vez no sea demasiado costoso de ejecutar. Se opto por usar el 0.9 para $\alpha$.
+
+
+
+
+
+\subsection{Experimento 3: Temperatura}
+
+Los resultados obtenidos tras 375 ejecuciones, 125 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro \texttt{t-min} y dejando todo lo dem√°s constante como:
+
+\begin{description}
+    \item[$\alpha$:] 0.90
+    \item[iter:] 250
+    \item[t-init:] 1.0
+\end{description}
+Se obtuvieron los siguientes resultados
+
+\begin{figure}[H]
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/3-tmin-bacp8.png}
+        \caption{Variaci√≥n de temperatura m√≠nima en bacp8}
+        \label{fig:tmin1}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}
+        \includegraphics[width=\linewidth]{img/3-tmin-bacp10.png}
+        \caption{Variaci√≥n de temperatura m√≠nima en bacp10}
+        \label{fig:tmin2}
+    \endminipage\hfill
+    \minipage{0.33\textwidth}%
+    \includegraphics[width=\linewidth]{img/3-tmin-bacp12.png}
+        \caption{Variaci√≥n de temperatura m√≠nima en bacp12}
+        \label{fig:tmin3}
+    \endminipage
+\end{figure}
+
+Con los siguientes valores promedios:
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule[1pt]
+    Instancia & Tiempo & Carga & Accuracy Promedio & Accuracy Final \\
+    \midrule
+     bacp8 &  0.3882 [s] & 17.0400 [cr√©dito] &   96.0000\% &  99.7653\% \\
+    bacp10 &  0.4219 [s] & 14.0800 [cr√©dito] &   92.0000\% &  99.5089\% \\
+    bacp12 &  0.7914 [s] & 18.0000 [cr√©dito] &  100.0000\% & 100.0000\% \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 variando \texttt{iter}}
+\end{table}
+
+En este experimento el gr√°fico se lee al rev√©s, los valores mas peque√±os para \texttt{t\_min} representan una mayor iteraci√≥n de temperaturas, por lo que los resultados deber√≠an acercarse mejor a una soluci√≥n √≥ptima. La temperatura m√≠nima esta en escala logar√≠tmica.
+
+Nuevamente bacp8 y bacp12 tienen un comportamiento muy similar, solo fallan en el orden de los $10^{-2}$, ya desde los $10^{-3}$ logran llegar a soluciones optimas siempre. bacp10 solo logra estabilizarse al llegar al orden de los $10^{-5}$.
+
+En este experimento se utilizan los mejores par√°metros de los dos experimentos anteriores, $\alpha = 0.90$ y \texttt{iter} = 250. Por lo que la calidad del experimento actual debiese ser superior. Los tiempos de ejecuci√≥n para el bacp8 y bacp10 est√°n cerca de los 0.4 [s] mientras que nuevamente bacp12 llega al doble con 0.4 [s]. Este parece ser un patron recurrente en todos los experimentos, bacp8 y bacp10 toman tiempos similares mientras que bacp12 toma el doble de tiempo. El otro patr√≥n recurrente es el comportamiento similar entre bacp8 y bacp12, pues suelen poseer para los mismos par√°metros resultados similares.
+
+Con respecto a las exactitudes es notable el 100\% obtenido en la instancia bacp12, muy de cerca bacp8 y nuevamente bacp10 resulta ser el que posee menor exactitud con un 92\%.
+
 
 
 \section{Conclusiones}
 
-Conclusiones RELEVANTES del estudio realizado. DeberÌa contener conclusiones
-del informe 1 junto con conclusiones obtenidas del desarrollo del
-software, an·lisis de resultados de experimentos y trabajo futuro.
+% Conclusiones RELEVANTES del estudio realizado. Deber√≠a contener conclusiones
+% del informe 1 junto con conclusiones obtenidas del desarrollo del
+% software, an√°lisis de resultados de experimentos y trabajo futuro.
+En este informe se present√≥ el estado del arte sobre el problema BACP. Se resumi√≥ la evoluci√≥n en los m√©todos que han surgido para resolver este problema. Una de las mejores formas de resolver este problema consiste en utilizar m√©todos h√≠bridos utilizando heur√≠sticas inteligentes con b√∫squedas locales (Simulated annealing, Tabu Search y Dynamic Tabusearch)~\cite{GbacpGaspero} que permiten guiar a los algoritmos a resultados √≥ptimos r√°pidamente.
 
+Dentro de los posibles modelos, el criterio de minimizaci√≥n del m√°ximo de las cargas de todos los periodos permite resolver el problema, no es el mas √≥ptimo para diferenciar soluciones. El criterio de minimizaci√≥n de distancias medias propuesto en~\cite{Monette07acp} resulta ser mas eficaz al momento de generar distintas soluciones.
 
-\section{BibliografÌa}
+Estos nuevos modelos y t√©cnicas h√≠bridas dan la posibilidad a la aparici√≥n de variantes mas complejas como lo es el GBACP propuesto en~\cite{GbacpGaspero,balac}.
 
-Indicando toda la informaciÛn necesaria de acuerdo al tipo de documento
+Como futuras l√≠neas de investigaci√≥n ser√≠a interesante ver el comportamiento de otras t√©cnicas completas, la mayor√≠a utilizan h√≠bridos de locales con CP. Quiz√°s probar con Backtracking  o Forward Checking a pesar de los grandes espacios de b√∫squeda. Por otra parte se demostr√≥ que los m√©todos h√≠bridos son un buen acercamiento para resolver este problema, ser√≠a interesante realizar nuevas mezclas h√≠bridas por ejemplo GA con b√∫squedas locales como Tabu Search o Simulated Annealing.
+
+\section{Bibliograf√≠a}
+
+Indicando toda la informaci√≥n necesaria de acuerdo al tipo de documento
 revisado. Las referencias deben ser citadas en el documento.  \bibliographystyle{plain}
 \bibliography{Referencias}
 
