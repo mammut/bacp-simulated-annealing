@@ -148,7 +148,7 @@ La principal variante a este problema es la GBACP presentada en~\cite{GbacpGaspe
 \subsection{Origen del problema}
 
 El BACP fue propuesto en 1990 por Hnich et al.,~\cite{csplibprob030} y publicado en CSPlib\footnote{CSPLib es una librería con múltiples problemas de prueba para solvers de satisfacción de restricciones.}
-Los primeros en abordar el problema fueron Castro y Manzano~\cite{DBLP:journals/corr/cs-PL-0110007}. Ellos presentan dos métodos para resolver el problema, el primero consiste en un modelo de programación entera que resuelven utilizando \verb+lp_solve+\footnote{Solver para programación lineal entera mixta. http://lpsolve.sourceforge.net/5.5/}. El segundo en un modelo basado en restricciones utilizando heurísticas de orden de instanciación de variables y asignación de valores utilizando el lenguaje Oz\footnote{Lenguaje de programación Mozart http://mozart.github.io/}. Al ser los primeros en abordar el problema, hicieron público en CSPlib tres mallas curriculares las cuales utilizaron en su experimentación. bacp8 una instancia de 8 periodos, bacp10 una instancia de 10 periodos y bacp12 una instancia de 12 periodos, las cuales corresponden a las tres carreras de informática que se imparten en la Universidad Técnica Federico Santa María. Estas instancias se convierten en las utilizadas por la mayoría de los investigadores posteriores para tener resultados comparables.
+Los primeros en abordar el problema fueron Castro y Manzano~\cite{DBLP:journals/corr/cs-PL-0110007}. Ellos presentan dos métodos para resolver el problema, el primero consiste en un modelo de programación entera que resuelven utilizando \verb+lp_solve+\footnote{Solver para programación líneal entera mixta. http://lpsolve.sourceforge.net/5.5/}. El segundo en un modelo basado en restricciones utilizando heurísticas de orden de instanciación de variables y asignación de valores utilizando el lenguaje Oz\footnote{Lenguaje de programación Mozart http://mozart.github.io/}. Al ser los primeros en abordar el problema, hicieron público en CSPlib tres mallas curriculares las cuales utilizaron en su experimentación. bacp8 una instancia de 8 periodos, bacp10 una instancia de 10 periodos y bacp12 una instancia de 12 periodos, las cuales corresponden a las tres carreras de informática que se imparten en la Universidad Técnica Federico Santa María. Estas instancias se convierten en las utilizadas por la mayoría de los investigadores posteriores para tener resultados comparables.
 
 \subsection{Primeros acercamientos: ILP y CP}
 
@@ -214,7 +214,7 @@ Los resultados que obtuvieron fueron los siguientes:
 
 El modelo mas rápido en encontrar una solución optima fue el híbrido entre $CP_1$ y $CP_2$, este modelo logró reducir el espacio de búsqueda que compensó el incremento del uso de variables y restricciones debido al uso híbrido de ambos algoritmos.
 
-Este trabajo dio pie a seguir investigando en la linea de modelos híbridos. Uno de ellos es el uso de Algoritmos Genéticos y Propagación de restricciones~\cite{Rutkowski}. En esta investigación utilizan un framework genérico de hibridación. El framework desarrollado les permite especificar la proporción de los métodos, ajustando cuanto tiempo se asigna al GA o al CP. De esa forma pudieron realizar diferentes pruebas cambiando el tiempo que GA o CP tiene destinado en el algoritmo híbrido. De todas formas el principal aporte de esta investigación fue el framework utilizado que les permitió controlar la proporción entre los algoritmos que componen al híbrido.
+Este trabajo dio pie a seguir investigando en la línea de modelos híbridos. Uno de ellos es el uso de Algoritmos Genéticos y Propagación de restricciones~\cite{Rutkowski}. En esta investigación utilizan un framework genérico de hibridación. El framework desarrollado les permite especificar la proporción de los métodos, ajustando cuanto tiempo se asigna al GA o al CP. De esa forma pudieron realizar diferentes pruebas cambiando el tiempo que GA o CP tiene destinado en el algoritmo híbrido. De todas formas el principal aporte de esta investigación fue el framework utilizado que les permitió controlar la proporción entre los algoritmos que componen al híbrido.
 
 Dentro de sus resultados en la investigación de GA + CP se observa que logra calcular el óptimo para las instancias bacp8, bacp10 y bacp12 en 15.05, 34.84 y 35.20 segundos respectivamente, mucho mas rápido de lo que logra \verb+lp_solve+.
 
@@ -490,20 +490,9 @@ Se utiliza una estructura de datos llamada \texttt{bacp\_instance} que contiene 
 
 \section{Descripción del algoritmo}
 
-% Cómo fue implementando, interesa la implementación más que el algoritmo
-% genérico, es decir, si se tiene que implementar SA, lo que se espera
-% es que se explique en pseudo código la estructura general y en párrafo
-% explicativo cada parte cómo fue implementada para su caso particular,
-% si se utilizan operadores se debe explicar por qué se utilizó ese
-% operador, si fuera el caso de una técnica completa, si se utiliza
-% recursión o no, etc. \textbf{Recuerde utilizar pseudocódigo para mostrar
-% cada algoritmo y separar la explicación de su algoritmo en secciones
-% para que se logre un mejor entendimiento. Además, en este punto no
-% se espera que se incluya código, eso va aparte.}
-
 \subsection{Heurística Greedy para una solución inicial}
 
-Una solución inicial balanceada es mejor que una solución inicial muy mala. SA utiliza una solucion inicial al azar, pero esta puede ser reemplazada por una solucion inicial construida de manera inteligente utilizando un algoritmo greedy.
+Una solución inicial balanceada es mejor que una solución inicial muy mala. SA utiliza una solución inicial al azar, pero esta puede ser reemplazada por una solución inicial construida de manera inteligente utilizando un algoritmo greedy.
 
 Para este caso se utiliza el siguiente algoritmo
 
@@ -512,11 +501,11 @@ Para este caso se utiliza el siguiente algoritmo
 \label{GreedyHeuristic}
 \begin{algorithmic}[1]
 \Procedure{Greedy\textendash Initialization} {}
-    \State \texttt{solution} $=[]$ Solucion inicial
-    \State \texttt{optimal\_load} = $\frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{creditos[i]}$ \quad Carga optima
+    \State \texttt{solution} $=[]$ Solución inicial
+    \State \texttt{optimal\_load} = $\frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{créditos[i]}$ \quad Carga optima
     \State $i = 0$ Periodo inicial
     \For{ramo in ramos}
-      \If{ramos periodo $i$ $>$ \texttt{max\_ramos} OR créditos periodo $i$ + creditos(ramo) $>$ \texttt{optimal\_load}}
+      \If{ramos periodo $i$ $>$ \texttt{max\_ramos} OR créditos periodo $i$ + créditos(ramo) $>$ \texttt{optimal\_load}}
 
         \State $i = (i + 1) \% n\_periods $
       \EndIf
@@ -529,21 +518,21 @@ Para este caso se utiliza el siguiente algoritmo
 \end{algorithmic}
 \end{algorithm}
 
-La idea general es obtener un optimo teórico utilizando la formula:
+La idea general es obtener un óptimo teórico utilizando la formula:
 
 \begin{align*}
-  \frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{creditos[i]}
+  \frac{1}{\text{n\_periodos}}\sum_{i}^{\text{n\_cursos}} \text{créditos[i]}
 \end{align*}
 
 es el promedio de créditos en los periodos, se obtiene sumando el total de créditos de la malla curricular y dividiendolo por el número de periodos.
 
-Conociendo el optimo teórico, se comienza una solución inicial vacía (linea 5). Luego se itera sobre cada ramo intentando asignarlo al periodo $i$-ésimo (lineas 6-8). El periodo $i$ se mueve al siguiente periodo si el número de ramos del periodo $i$ es mayor al máximo de ramos por periodo permitido (restricción) o si el número de créditos del periodo $i$ mas los créditos del nuevo ramo exceden el optimo (linea 6), si esto sucede se mueve $i$ al siguiente periodo disponible, como seguridad se modula el resultado al número total de periodos, por si el algoritmo greedy llega a pasarse del número de periodos que existen, para que siga asignando en el periodo 0 (linea 7).
+Conociendo el óptimo teórico, se comienza una solución inicial vacía (línea 5). Luego se itera sobre cada ramo intentando asignarlo al periodo $i$-ésimo (líneas 6-8). El periodo $i$ se mueve al siguiente periodo si el número de ramos del periodo $i$ es mayor al máximo de ramos por periodo permitido (restricción) o si el número de créditos del periodo $i$ mas los créditos del nuevo ramo exceden el óptimo (línea 6), si esto sucede se mueve $i$ al siguiente periodo disponible, como seguridad se modula el resultado al número total de periodos, por si el algoritmo greedy llega a pasarse del número de periodos que existen, para que siga asignando en el periodo 0 (línea 7).
 
-Una vez calculado el periodo $i$-ésimo se asigna el \texttt{ramo} al periodo $j$ (linea 9).
+Una vez calculado el periodo $i$-ésimo se asigna el \texttt{ramo} al periodo $j$ (línea 9).
 
-El procedimiento \textbf{ArreglarColisionesPrereq()} (linea 10) busca en el periodo actual posibles colisiones por prerequisitos, si el ramo $a$ es prerequisito del ramo $b$ y ambos quedan asignados en el periodo $i$, entonces se reasigna el ramo $b$ al siguiente periodo.
+El procedimiento \textbf{ArreglarColisionesPrereq()} (línea 10) busca en el periodo actual posibles colisiones por prerequisitos, si el ramo $a$ es prerequisito del ramo $b$ y ambos quedan asignados en el periodo $i$, entonces se reasigna el ramo $b$ al siguiente periodo.
 
-El algoritmo greedy si bien no entrega el optimo, si logra asignar los ramos inicialmente cumpliendo por lo menos con las restricciones de número máximo y mínimo de créditos y ramos por periodo por lo que SA es guiado a una zona de soluciones mas balanceadas.
+El algoritmo greedy si bien no entrega el óptimo, si logra asignar los ramos inicialmente cumpliendo por lo menos con las restricciones de número máximo y mínimo de créditos y ramos por periodo por lo que SA es guiado a una zona de soluciones mas balanceadas.
 
 \subsection{Algoritmo Simulated Annealing para el BACP}
 
@@ -581,21 +570,13 @@ Existen dos iteraciones principales, la iteración por temperatura y la iteraci�
 \end{algorithmic}
 \end{algorithm}
 
-En la linea 6 se comienza la iteración por temperatura, mientras la temperatura actual sea mayor a la temperatura mínima se repite el proceso. La temperatura actual disminuye en cada iteración según una tasa de cambio dada por $\alpha$ en la linea 18.
+En la línea 6 se comienza la iteración por temperatura, mientras la temperatura actual sea mayor a la temperatura mínima se repite el proceso. La temperatura actual disminuye en cada iteración según una tasa de cambio dada por $\alpha$ en la línea 18.
 
-La iteración de búsqueda local sucede entre las lineas 7 a la 17. Para la búsqueda local se genera una solución vecina cambiando aleatoreamente un curso de periodo (linea 8), si el costo de esta nueva solución es menor al costo de la solución anterior o si aleatoreamente se decide aceptar una solución peor (linea 11), entonces la solución actual pasa a ser la nueva solución vecina (linea 12).
+La iteración de búsqueda local sucede entre las líneas 7 a la 17. Para la búsqueda local se genera una solución vecina cambiando aleatoreamente un curso de periodo (línea 8), si el costo de esta nueva solución es menor al costo de la solución anterior o si aleatoreamente se decide aceptar una solución peor (línea 11), entonces la solución actual pasa a ser la nueva solución vecina (línea 12).
 
-Por último se mantiene registro de cual ha sido la mejor de todas las soluciones encontradas. Si se encuentra una mejor entonces se actualiza (lineas 14-16).
+Por último se mantiene registro de cual ha sido la mejor de todas las soluciones encontradas. Si se encuentra una mejor entonces se actualiza (líneas 14-16).
 
 \section{Experimentos}
-
-% Se necesita saber cómo experimentaron, cómo definieron parámetros,
-% cómo se fueron modificando, cuáles problemas se trataron, cuáles fueron
-% las instancias utilizadas, cuáles fueron las características de las
-% instancias, cuáles fueron los criterios de término del algoritmo.
-% \textbf{En el caso de las técnicas incompletas, es importante que
-% ejecute su programa varias veces con distintas semillas aleatorias,
-% para obtener valores estadísticos de los resultados}.
 
 Los parámetros del algoritmo son:
 
@@ -606,7 +587,7 @@ Los parámetros del algoritmo son:
   \item[t-min:] Temperatura final
 \end{description}
 
-Por lo que se realizaron 4 experimentos, dejando 3 parámetros constantes y variando el parámetro restante entre un rango de valores razonables. Para ayudar en este proceso repetitivo, se escribió un script en python capaz de ejecutar múltiples veces una instancia variando el parámetro a elección, luego los resultados son graficados mostrando el valor de créditos/costos encontrado y su exactitud en comparación al optimo, para cada valor del parámetro en estudio.
+Por lo que se realizaron 4 experimentos, dejando 3 parámetros constantes y variando el parámetro restante entre un rango de valores razonables. Para ayudar en este proceso repetitivo, se escribió un script en python capaz de ejecutar múltiples veces una instancia variando el parámetro a elección, luego los resultados son graficados mostrando el valor de créditos/costos encontrado y su exactitud en comparación al óptimo, para cada valor del parámetro en estudio.
 
 Todos los experimentos fueron probados usando los clásicos bacp8, bacp10 y bacp12.
 
@@ -638,7 +619,6 @@ Para este experimento se utilizan los siguientes parámetros
 
 \subsection{Experimento 3: Temperatura}
 
-
 En el caso de la temperatura se tienen dos parámetros que se pueden controlar, pero por la  formula que se utiliza para determinar si se acepta una peor solución, la temperatura inicial conviene dejarla fija en 1 y simplemente variar la temperatura mínima para controlar las repeticiones. En este caso se prueban los siguientes valores de \texttt{t\_min}: 0.001, 0.0001, 0.00001, 0.000001 y 0.0000001
 
 \begin{description}
@@ -650,21 +630,11 @@ En el caso de la temperatura se tienen dos parámetros que se pueden controlar, 
 
 \section{Resultados}
 
-% Que fue lo que se logró con la experimentación, incluir tablas y parámetros,
-% gráficos, etc. lo más explicativo posible. Además destacar puntos
-% importantes del problema, características de las instancias que influyeron
-% en los resultados, valores de parámetros que influyeron en los resultados,
-% análisis de calidad de las soluciones encontradas a través del tiempo,
-% análisis en profundidad de la técnica vs los resultados obtenidos,
-% valores promedio, desviaciones, \textbf{comparaciones con resultados
-% de la literatura}, etc. También debería discutir qué cosas podría
-% haber agregado o quedan como desafíos para trabajo futuro en su algoritmo.
-
-El script en python arroja un grafico que muestra créditos/costo (en rojo) vs el parametro de estudio y exactitud (en verde) vs el parametro de estudio.
+El script en python arroja un gráfico que muestra créditos/costo (en rojo) vs el parámetro de estudio y exactitud (en verde) vs el parámetro de estudio.
 
 \subsection{Experimento 1: $\alpha$}
 
-Los resultados obtenidos tras 2175 ejecuciones, 725 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro $\alpha$ y dejando todo lo demás constante como:
+Los resultados obtenidos tras 2175 ejecuciones, 725 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parámetro $\alpha$ y dejando todo lo demás constante como:
 \begin{description}
     \item[iter:] 100
     \item[t-init:] 1.0
@@ -706,7 +676,7 @@ Con los siguientes valores promedios:
   \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 variando $\alpha$}
 \end{table}
 
-Observando los tres graficos se aprecia que mientras mayor es $\alpha$, mayor cantidad de interaciones de temperatura SA debe realizar, por lo que se nota la tendencia a obtener una exactitud del 100\% cerca de un $\alpha = 0.93$ en adelante. Los únicos puntos anormales son el 0.85, 0.875, 0.92 los cuales presentaron un promedio de 17.25 créditos en las 25 repeticiones de la instancia en cada punto.
+Observando los tres gráficos se aprecia que mientras mayor es $\alpha$, mayor cantidad de interaciones de temperatura SA debe realizar, por lo que se nota la tendencia a obtener una exactitud del 100\% cerca de un $\alpha = 0.93$ en adelante. Los únicos puntos anormales son el 0.85, 0.875, 0.92 los cuales presentaron un promedio de 17.25 créditos en las 25 repeticiones de la instancia en cada punto.
 
 En este caso del bacp10 se comporto de manera mas errática, pero con una clara tendencia a llegar a los 14 créditos a medida que $\alpha$ aumenta. Nuevamente se observa que los puntos 0.85, 0.875 y 0.92 tienen un peor rendimiento en encontrar el óptimo.
 
@@ -716,7 +686,7 @@ Con respecto a los tiempos promedios, tanto el bacp8 como el bacp10 les tomo sol
 
 \subsection{Experimento 2: Iteraciones locales}
 
-Los resultados obtenidos tras 825 ejecuciones, 275 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro \texttt{iter} y dejando todo lo demás constante como:
+Los resultados obtenidos tras 825 ejecuciones, 275 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parámetro \texttt{iter} y dejando todo lo demás constante como:
 
 \begin{description}
     \item[$\alpha$:] 0.90
@@ -759,7 +729,7 @@ Con los siguientes valores promedios:
   \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 variando \texttt{iter}}
 \end{table}
 
-Lo primero que se observa en este experimento es que los valores se llega rápidamente a soluciones optimas a medida que la cantidad de iteraciones locales aumenta. Incluso en la instancia bacp10, la cual en el experimento anterior resulto ser la mas errática, en este caso solo tiene los valores 100, 200 y 250 incorrectos, ya a partir de las 300 iteraciones logra llegar casi siempre al optimo.
+Lo primero que se observa en este experimento es que los valores se llega rápidamente a soluciones optimas a medida que la cantidad de iteraciones locales aumenta. Incluso en la instancia bacp10, la cual en el experimento anterior resulto ser la mas errática, en este caso solo tiene los valores 100, 200 y 250 incorrectos, ya a partir de las 300 iteraciones logra llegar casi siempre al óptimo.
 
 Por otro lado las instancias bacp8 y bacp12 tienen un comportamiento muy similar, con tan solo 150 iteraciones en adelante se obtienen resultados óptimos. La diferencia entre ambos se produce en el tiempo de ejecución, bacp12 le toma el doble de tiempo que a bacp8. Resalta la exactitud promedio de un 99\% en ambos casos, y de casi el 100\% en la exactitud total.
 
@@ -773,7 +743,7 @@ Cabe resaltar que en este experimento se esta utilizando el mejor valor encontra
 
 \subsection{Experimento 3: Temperatura}
 
-Los resultados obtenidos tras 375 ejecuciones, 125 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parametro \texttt{t-min} y dejando todo lo demás constante como:
+Los resultados obtenidos tras 375 ejecuciones, 125 por cada problema bacp8, bacp10 y bacp12 variando unicamente el parámetro \texttt{t-min} y dejando todo lo demás constante como:
 
 \begin{description}
     \item[$\alpha$:] 0.90
@@ -820,11 +790,17 @@ En este experimento el gráfico se lee al revés, los valores mas pequeños para
 
 Nuevamente bacp8 y bacp12 tienen un comportamiento muy similar, solo fallan en el orden de los $10^{-2}$, ya desde los $10^{-3}$ logran llegar a soluciones optimas siempre. bacp10 solo logra estabilizarse al llegar al orden de los $10^{-5}$.
 
-En este experimento se utilizan los mejores parámetros de los dos experimentos anteriores, $\alpha = 0.90$ y \texttt{iter} = 250. Por lo que la calidad del experimento actual debiese ser superior. Los tiempos de ejecución para el bacp8 y bacp10 están cerca de los 0.4 [s] mientras que nuevamente bacp12 llega al doble con 0.4 [s]. Este parece ser un patron recurrente en todos los experimentos, bacp8 y bacp10 toman tiempos similares mientras que bacp12 toma el doble de tiempo. El otro patrón recurrente es el comportamiento similar entre bacp8 y bacp12, pues suelen poseer para los mismos parámetros resultados similares.
+En este experimento se utilizan los mejores parámetros de los dos experimentos anteriores, $\alpha = 0.90$ y \texttt{iter} = 250. Por lo que la calidad del experimento actual debiese ser superior. Los tiempos de ejecución para el bacp8 y bacp10 están cerca de los 0.4 [s] mientras que nuevamente bacp12 llega al doble con 0.4 [s]. Este parece ser un patrón recurrente en todos los experimentos, bacp8 y bacp10 toman tiempos similares mientras que bacp12 toma el doble de tiempo. El otro patrón recurrente es el comportamiento similar entre bacp8 y bacp12, pues suelen poseer para los mismos parámetros resultados similares.
 
 Con respecto a las exactitudes es notable el 100\% obtenido en la instancia bacp12, muy de cerca bacp8 y nuevamente bacp10 resulta ser el que posee menor exactitud con un 92\%.
 
 
+\subsection{Resultados generales}
+Un patrón interesante en los tres experimentos es que las instancias bacp8 y bacp12 suelen tener un mejor comportamiento, logrando llegar a soluciones de muy buena calidad rápidamente. Por otra parte el bacp10 tiende a ser mas inestable, sus variaciones entre los diferentes parámetros son mucho mayores. En todos los experimentos bacp10 obtiene la menor exactitud promedio. Tanto bacp8 como bacp12 tienen un promedio de 17 y 18 créditos por periodo mientras que bacp10 solo tiene 14, se entiende entonces que bacp10 tiene una mayor cantidad forma de asignar los cursos por lo que el espacio de búsqueda es mas irregular, pequeñas variaciones pueden lograr una gran deferencia en el resultado.
+
+Con respecto a los parámetros en si, $\alpha$ parece ser el mas irregular, pues los cambios en este arrojan resultados muy dispersos. Las iteraciones locales y temperatura tienden a ser mucho mas estables, de todas formas cabe notar que el experimento 2 y 3 fueron ejecutados utilizando los mejores resultados del experimento anterior, esto podría significar una mejor sintonización de los parámetros siguientes.
+
+En general los resultados obtenidos son comparables con los de~\cite{GbacpGaspero} quienes implementaron simulated annealing con resultados excepcionales. Si bien ambos son inferiores a 1 segundo, en ~\cite{GbacpGaspero} utilizan software especializado en búsquedas locales que ofrecen estructuras especificas para la resolución de este tipo de problemas.
 
 \section{Conclusiones}
 
@@ -838,6 +814,12 @@ Dentro de los posibles modelos, el criterio de minimización del máximo de las 
 Estos nuevos modelos y técnicas híbridas dan la posibilidad a la aparición de variantes mas complejas como lo es el GBACP propuesto en~\cite{GbacpGaspero,balac}.
 
 Como futuras líneas de investigación sería interesante ver el comportamiento de otras técnicas completas, la mayoría utilizan híbridos de locales con CP. Quizás probar con Backtracking  o Forward Checking a pesar de los grandes espacios de búsqueda. Por otra parte se demostró que los métodos híbridos son un buen acercamiento para resolver este problema, sería interesante realizar nuevas mezclas híbridas por ejemplo GA con búsquedas locales como Tabu Search o Simulated Annealing.
+
+Con respecto a la implementación de Simulated Annealing con Greedy para este problema se observa que es un algoritmo excelente para resolver el problema. Los resultados obtenidos tienen una exactitud cercana al 99\% y un tiempo de ejecución que por lo general no supera 1 segundo, muy comparables con los presentados en la literatura.
+
+El algoritmo presenta una serie de parámetros que permiten realizar una sintonización interesante. Además la representación elegida es muy sencilla de implementar en forma de arreglo dinámico de heap, lo cual permite tiempos de acceso en un arreglo de orden constante $\mathcal{O}(1)$. El algoritmo greedy fue de gran ayuda para llevar al algoritmo simulated annealing a un sector del espacio de búsqueda que tiende a tener buenos resultados. El algoritmo greedy tiene una orden de $\mathcal{O}(n^2)$, pues asignar los cursos a un periodo es líneal de orden $\mathcal{O}(n)$, pero revisar si existen colisiones implica una revisión extra.
+
+Como futuras líneas de trabajo en esta implementación seria interesante mejorar la eficiencia de varios algoritmos, en especial la inicialización greedy puede ser vastamente mejorada, por ejemplo el calculo de los créditos no tiene por que ser calculada en cada iteración, podría ser asignada localmente y utilizar incrementación por cada iteración de asignación. Otro aspecto que podría ser mejorado es una tabla hash para los prerequisitos de un curso. Actualmente se utiliza un arreglo dinámico con estructuras que definen cursos a y b, por lo que buscar los prerequisitos de a tiene un orden $\mathcal{O}(n)$, pues se debe recorrer la lista completa de prerequisitos buscando las estructuras en que a sea el curso que estamos buscando. Una tabla hash podría ser indexada por el curso, así acceder al elemento en cuestión seria inmediato. Otra forma de hacerlo seria un arreglo de prerequisitos, en que cada indice es el numero de un curso, y dentro una lista de prerequisitos. Este método seria muy rápido de acceder a la lista de prerequisitos de un curso en especifico.
 
 \section{Bibliografía}
 

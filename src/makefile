@@ -1,7 +1,7 @@
 CC = gcc
 DEBUG = -g
 CFLAGS = -Wall -c $(DEBUG)
-# LDFLAGS = -Wall -lm -largp $(DEBUG) # OSX
+#LDFLAGS = -Wall -lm -largp $(DEBUG) # OSX
 LDFLAGS = -Wall -lm $(DEBUG) # Linux
 EXEC = bacp
 
