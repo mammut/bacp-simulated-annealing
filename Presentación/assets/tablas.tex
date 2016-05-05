@@ -1,0 +1,56 @@
+\documentclass[letterpaper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-lcroman]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm]{geometry}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[labelformat=empty]{caption}
+% \usepackage{color}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+% \usepackage{biblatex}
+
+\definecolor{orange}{HTML}{1F2628}
+\definecolor{white}{HTML}{FFFFFF}
+\renewcommand{\arraystretch}{1.2}
+\color{white}
+
+\begin{document}
+\pagecolor{orange}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule[1pt]
+    Instancia & Tiempo Promedio & Carga Promedio & Exactitud\\
+    \midrule
+     bacp8 &   29.24 [s] & 19.35 [crédito] &  87.8553\% \\
+    bacp10 &  118.89 [s] & 18.35 [crédito] &  76.2943\% \\
+    bacp12 &  204.06 [s] &  19.9 [crédito] &  90.4522\% \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valores promedios de AG sobre bacp8, bacp10 y bacp12 luego de 15 repeticiones}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}lcccc@{}}
+    \toprule[1pt]
+    Instancia & Tiempo Promedio & Carga Promedio & Exactitud \\
+    \midrule
+     bacp8 &  0.4413 [s] & 17.0000 [crédito] & 100.0000\% \\
+    bacp10 &  0.4064 [s] & 14.0500 [crédito] &  99.6441\% \\
+    bacp12 &  0.9057 [s] & 18.0000 [crédito] & 100.0000\% \\
+    \bottomrule
+  \end{tabular}
+  \caption{Valores promedios de SA + Greedy sobre bacp8, bacp10 y bacp12 luego de 100 repeticiones}
+\end{table}
+
+
+
+\end{document}

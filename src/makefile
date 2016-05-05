@@ -1,13 +1,18 @@
-CC = gcc
+CC = clang
 DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
-#LDFLAGS = -Wall -lm -largp $(DEBUG) # OSX
-LDFLAGS = -Wall -lm $(DEBUG) # Linux
+UNAME := $(shell uname)
+ifeq ($(UNAME), Linux)
+	LDFLAGS = -Wall -lm $(DEBUG) # Linux
+	CFLAGS = -Wall -c $(DEBUG)
+endif
+ifeq ($(UNAME), Darwin)
+	LDFLAGS = -Wall -lm -L/usr/local/opt/argp-standalone/lib -largp $(DEBUG) # OSX
+	CFLAGS = -Wall -c -I/usr/local/include $(DEBUG)
+endif
 EXEC = bacp
-
 OBJS = main.o \
-	   bacp.o \
-	   simulated-annealing.o
+			 bacp.o \
+			 simulated-annealing.o
 
 all: $(EXEC)
 
@@ -16,6 +21,9 @@ $(EXEC): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) $<
+
+summary: 
+	awk -f lc.awk *.c includes/*.h
 
 clean:
 	find . -name '*.o' -type f -delete

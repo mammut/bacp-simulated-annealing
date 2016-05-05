@@ -3,6 +3,13 @@
 El siguiente documento explica el proceso de compilación y ejecución del solver usando Greedy + Simulated Annealing.
 
 El programa fue probado en una maquina virtual con Fedora 21 de 64 bits, 512 MB de RAM y un procesador Intel Core i5 2.5 GHz.
+Dicha maquina virtual esta incluida dentro del proyecto y se puede utilizar con       [Vagrant](https://www.vagrantup.com/). Para utilizarla simplemente se debe ejecutar:
+
+```bash
+$ vagrant up # esperar a que termine de bajar y levantar la máquina
+$ vagrant ssh # ingresar a la maquina virtual
+$ cd /vagrant/src # dirigirse a la carpeta compartida entre las maquinas, la cual tiene el código del proyecto
+```
 
 ### Compilación
 
@@ -18,10 +25,13 @@ para limpiar el proyecto:
 $ make clean
 ```
 
-#####Nota*
-Si se desea compilar en OS X, comentar linea 5 del archivo makefile y descomentar linea 4.
+##### Nota
+El programa utiliza la librería **argp** para parsear los parámetros, esta librería viene por defecto en los sitememas Unix, además la compilación fue probada exotisamente en los computadores de la universidad por ssh. Para instalar argp en OSX se puede utilizar [brew](http://brew.sh/):
 
-El programa utiliza la libreria **argp** para parsear los parámetros, esta libreria viene por defecto en los sitememas Unix, además la compilación fue probada exotisamente en los computadores de la universidad por ssh.
+```bash
+$ brew install argp-standalone
+```
+
 ### Ejecución
 
 Para ejecutar el programa se debe indicar al menos el archivo de entrada como argumento. Se tienen las siguientes opciones:
@@ -43,6 +53,11 @@ Para ejecutar el programa se debe indicar al menos el archivo de entrada como ar
 ```
 
 #### Sobre el código
+Para obtener un resumen sobre el código ejecutar:
+```bash
+$ make summary
+```
+
 | Archivo                        | Código | Comentarios | Raw |
 |--------------------------------|--------|-------------|-----|
 | includes/bacp.h                | 23     | 4           | 29  |
@@ -55,4 +70,4 @@ Para ejecutar el programa se debe indicar al menos el archivo de entrada como ar
  - Total código: 316
  - Total comentario: 140
  - Total raw: 531
- - Porcentaje comentarios: 30.701754
+ - Porcentaje comentarios: 30.7%
